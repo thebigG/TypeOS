@@ -1,1 +1,4 @@
 perf->http://www.brendangregg.com/perf.html
+create a ram disk-->https://www.jamescoyle.net/how-to/943-create-a-ram-disk-in-linux
+tmpfs vs ramfs-->https://www.jamescoyle.net/knowledge/951-the-difference-between-a-tmpfs-and-ramfs-ram-disk
+ext4 filesystem-->https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout
