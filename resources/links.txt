@@ -4,3 +4,4 @@ tmpfs vs ramfs-->https://www.jamescoyle.net/knowledge/951-the-difference-between
 ext4 filesystem-->https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout
 ext4 kernel official docs-->https://www.kernel.org/doc/Documentation/filesystems/ext4.txt
 ext4 wiki-->https://ext4.wiki.kernel.org/index.php/Main_Page
+journaling intervals explanation-->https://superuser.com/questions/479379/how-long-can-file-system-writes-be-cached-with-ext4/479384#479384
