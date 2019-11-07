@@ -3,3 +3,4 @@ create a ram disk-->https://www.jamescoyle.net/how-to/943-create-a-ram-disk-in-l
 tmpfs vs ramfs-->https://www.jamescoyle.net/knowledge/951-the-difference-between-a-tmpfs-and-ramfs-ram-disk
 ext4 filesystem-->https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout
 ext4 kernel official docs-->https://www.kernel.org/doc/Documentation/filesystems/ext4.txt
+ext4 wiki-->https://ext4.wiki.kernel.org/index.php/Main_Page
