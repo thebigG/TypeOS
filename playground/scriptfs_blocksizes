@@ -1,0 +1,7 @@
+label, memory_size, page_size(4K granularity)
+Poem, 32KB, 8 pages
+Short Story, 128KB, 32 pages
+Novellete, 512KB, 128 pages
+Small Novel, 256KB, 64 pages
+Medium Novel, 512KB, 128 pages
+Large Novel, 2MB, 512 pages
