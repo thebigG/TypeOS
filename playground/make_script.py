@@ -54,7 +54,7 @@ if (len(sys.argv) < 2):
     print("USAGE: python3 ./make_script.py size ./file_path\n\
     For example:  python3 ./make_script.py 32kb 'How Alice met Bob' ")
 
-file_name = sys.argv[1]
-size = sys.argv[2]
+file_name = sys.argv[2]
+size = sys.argv[1]
 
 sequential_writethrough(file_name, size)
