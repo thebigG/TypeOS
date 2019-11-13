@@ -1,1 +1,2 @@
-mount -t tmpfs -o size=256m ext4 /mnt/scriptfs
+ mount -t ramfs -o size=64m ramfs /mnt/scriptfs/
+
