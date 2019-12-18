@@ -1,5 +1,11 @@
 import sys
 import random
+import ctypes
+import os 
+syscall_num = 333
+libc = ctypes.CDLL(None)
+syscall = libc.syscall
+syscall(syscall_num, os.getpid())
 
 #I know there are better ways to generate words(like reading from a giant file of words, which linux has).
 #But I don't want to interact with the filesystem unless it is for our intent and purposes, because that will bring inaccuracies we don't want.
@@ -26,7 +32,35 @@ def get_random_word(min_size, max_size):
     word  = ''
     for i in range(size):
         word += character_pool[random.randrange(0,len(character_pool))]
-    return word + " "
+    return word
+
+def open_and_zerofill_file(filepath, size, mode, fill_value = ' ' ):
+    size_info = get_size(size)
+    if(size_info[1].upper() == "MB"):
+        size = size_info[0] * pow(2,20)
+    elif size_info[1].upper() == "KB":
+        size = size_info[0] * pow(2,10)
+    f = open(filepath, mode)
+    f.truncate(0)
+    for i in range(size):
+        f.write(fill_value.encode())
+    return (f, size)
+
+def random_writethrough(filepath, filesize, times_to_write):
+    
+    file_info = open_and_zerofill_file(filepath, filesize, 'w+b')
+    f = file_info[0]
+    size = file_info[1]
+    for n in range(times_to_write):
+        f.seek(random.randrange(size))
+        print("seek location:", f.tell())
+        f.write(get_random_word(0,1).encode())
+    f.close()
+
+
+
+
+
 
 def sequential_writethrough( filepath, size ):
     """
@@ -37,24 +71,53 @@ def sequential_writethrough( filepath, size ):
     If the file does not exist, the function will create a new file at "filepath" and
     write the contents to that new file.
     The content of this file is randomly generated words by calling the function get_random_word.
+    Since this is the writethrough function, it will call write(posix/python just probably write it
+    somewhere in the buffercache) as soon as the random word is generated.
     """
     script_file  = open(filepath, 'a')
     size_info =  get_size(size)
-    bytes = 0
-    if size_info[1].upper() == 'KB':
-        bytes = size_info[0]*1024
-    elif size_info[1].upper() =="MB":
-        bytes = size_info[0]*pow(2,20)
-    for byte in range(bytes):
+    bytes_size = 0
+    print("size_info:", size_info)
+    print("size returned:", size_info[0])
+    if size_info[1].upper() == "KB":
+        print("KB match")
+        bytes_size  = size_info[0] * pow(2,10)
+        print("size after KB match:", bytes_size)
+    elif size_info[1].upper() == "MB":
+        bytes_size = size_info[0] * pow(2,20)
+    elif size_info[1].upper() == "B":
+        bytes_size = size_info[0]
+    file_current_size = 0
+    while file_current_size<bytes_size:
         word = get_random_word(3, 5)
-        script_file.write(word)
+        print("file_current_size, bytes", file_current_size, bytes_size )
+        while(file_current_size+len(word)>bytes_size):
+            #print("while runnig")
+            word = get_random_word(1,5)
+        if(file_current_size+len(word)<bytes_size):
+            script_file.write(word + " ")
+            file_current_size += len(word + " ")
+        else:
+            script_file.write(word)
+            file_current_size += len(word)
+            #print("file_current_size:", file_current_size)
     script_file.close()
 
-if (len(sys.argv) < 2):
-    print("USAGE: python3 ./make_script.py size ./file_path\n\
-    For example:  python3 ./make_script.py 32kb 'How Alice met Bob' ")
 
+
+#def rand
+
+if (len(sys.argv) < 2):
+    print("USAGE: python3 ./make_script.py size ./file_path\ mode cache_strategy\n For example:  python3 ./make_script.py 32kb 'How Alice met Bob' seq wr_through  ")
+    exit()
+cache_strategy = sys.argv[4]
+mode = sys.argv[3]
 file_name = sys.argv[2]
 size = sys.argv[1]
+if len(sys.argv)>5:
+    times_to_write = sys.argv[5]
+if mode == "seq" and cache_strategy=="wr_through":
+    sequential_writethrough(file_name, size)
 
-sequential_writethrough(file_name, size)
+elif mode == "rand" and cache_strategy=="wr_through":
+    random_writethrough(file_name, size,int(times_to_write) )
