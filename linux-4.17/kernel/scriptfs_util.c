@@ -96,6 +96,7 @@ struct page** init_pages(enum scriptfs_context new_context)
     {
       printk("pre-allocation successful!\n");
     }
+    new_pages[i].scriptfs_flag = SCRIPTFS_PAGE_FLAG_KEY;
     __SetPageReferenced(new_pages[i]);
     // __SetPageReferenced(scriptfs_poems[i].poem_page); //maybe doing this is not such a good idea(?)
     i++;
@@ -280,80 +281,6 @@ struct page* fetch_next_page(unsigned long inode)
     }
     head = head->next;
   }
-}
-/**
-Initializes the bit_range_table.
-Right now this supports only up to BIT_RANGE_TABLE_ROWS files.
-*/
-int init_file_range_mapping_table()
-{
-  bit_range_table =   kmalloc(sizeof(struct file_range_mapping) * BIT_RANGE_TABLE_ROWS,GFP_KERNEL);
-  if(bit_range_table == NULL)
-  {
-    return -1;
-  }
-  int i = 0;
-  while(i<BIT_RANGE_TABLE_ROWS)
-  {
-    bit_range_table[i].inode  = -1;
-    bit_range_table[i].start_bit = -1;
-    bit_range_table[i].end_bit = -1;
-    i++;
-  }
-  return 0;
-}
-/**
-This function adds an entry to the
-bit_range_table.
-inode: inode of the file
-start_index: the begiining of the
-*/
-int add_entry_bit_range_table(unsigned long	 new_inode, int new_start_bit, int new_end_bit)
-{
-  int i = 0;
-  while(i<BIT_RANGE_TABLE_ROWS)
-  {
-    if(bit_range_table[i].inode  ==  -1)
-    {
-      break;
-    }
-    i++;
-  }
-  if(i>=BIT_RANGE_TABLE_ROWS)
-  {
-    return -1;
-  }
-  bit_range_table[i].inode  =  new_inode;
-  bit_range_table[i].start_bit = new_start_bit;
-  bit_range_table[i].end_bit = new_end_bit;
-  return 0;
-}
-/**
-This removes the entry at index
-from the bit_range_table
-It sets the inode value of that row in the table to -1.
-*/
-void remove_entry_bit_range_table(int index)
-{
-  bit_range_table[index].inode  = -1;
-}
-int remove_inode_entry_bit_range_table(int inode)
-{
-  int i = 0;
-  if(inode<0)
-  {
-    return -1;
-  }
-  while(i<BIT_RANGE_TABLE_ROWS)
-  {
-    if(bit_range_table[i].inode ==  inode)
-    {
-      remove_entry_bit_range_table(i);
-      return 0;
-    }
-    i++;
-  }
-  return -1;
 }
 int get_context_page_size(enum scriptfs_context new_context)
 {

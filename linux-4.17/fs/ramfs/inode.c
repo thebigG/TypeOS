@@ -45,7 +45,7 @@ int wirte_count = 0;
 // extern struct page* global_page;
 // extern enum scriptfs_state current_scriptfs_state;
 // EXPORT_SYMBOL(global_page);
-// EXPORT_SYMBOL(current_scriptfs_state);
+// EXPORT_SYMBOL(current_scriptfs_state);  
 struct ramfs_mount_opts {
 	umode_t mode;
 };
