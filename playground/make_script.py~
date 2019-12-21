@@ -1,11 +1,22 @@
 import sys
 import random
 import ctypes
-import os 
-syscall_num = 333
+import os
+import subprocess
+import  scriptfs_util_userspace
+syscall_num_scriptfs_pid = 333
+syscall_num_scriptfs_state  =  334
+syscall_num_scriptfs_context  = 335
 libc = ctypes.CDLL(None)
 syscall = libc.syscall
-syscall(syscall_num, os.getpid())
+syscall(syscall_num_scriptfs_pid, os.getpid())
+context_dir = {"poem": scriptfs_util_userspace.scriptfs_context.scriptfs_context_POEM,
+                "short_novel": scriptfs_util_userspace.scriptfs_context.scriptfs_context_SHORT_NOVEL,
+                "small_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_SMALL_NOVEL,
+                "medium_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_MEDIUM_NOVEL,
+                "large_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_LARGE_NOVEL,
+                 "super_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_SUPER_NOVEL,
+               "no_context":scriptfs_util_userspace.scriptfs_context.scriptfs_context_NO_CONTEXT }
 
 #I know there are better ways to generate words(like reading from a giant file of words, which linux has).
 #But I don't want to interact with the filesystem unless it is for our intent and purposes, because that will bring inaccuracies we don't want.
@@ -85,10 +96,12 @@ def sequential_writethrough( filepath, size ):
         print("size after KB match:", bytes_size)
     elif size_info[1].upper() == "MB":
         bytes_size = size_info[0] * pow(2,20)
+    elif size_info[1].upper() == "B":
+        bytes_size = size_info[0]
     file_current_size = 0
     while file_current_size<bytes_size:
         word = get_random_word(3, 5)
-        print("file_current_size, bytes", file_current_size, bytes_size )
+        #print("file_current_size, bytes", file_current_size, bytes_size )
         while(file_current_size+len(word)>bytes_size):
             #print("while runnig")
             word = get_random_word(1,5)
@@ -105,15 +118,36 @@ def sequential_writethrough( filepath, size ):
 
 #def rand
 
-if (len(sys.argv) < 2):
-    print("USAGE: python3 ./make_script.py size ./file_path\ mode cache_strategy\n For example:  python3 ./make_script.py 32kb 'How Alice met Bob' seq wr_through  ")
+if (len(sys.argv) < 7):
+    print("USAGE: python3 ./make_script.py -c context_clue  size ./file_path\ mode cache_strategy\n For example:  python3 ./make_script.py -c 'poem' 20kb 'How Alice met Bob' seq wr_through  ")
     exit()
-cache_strategy = sys.argv[4]
-mode = sys.argv[3]
-file_name = sys.argv[2]
-size = sys.argv[1]
-if len(sys.argv)>5:
-    times_to_write = sys.argv[5]
+
+cache_strategy = sys.argv[6]
+mode = sys.argv[5]
+file_name = sys.argv[4]
+size = sys.argv[3]
+context = sys.argv[2]
+print("working#1")
+if(context in context_dir):
+    return_val  = 0
+    if( return_val != 0):
+        print("return value from context syscall(failure code):",return_val)
+        exit()
+    else:
+        print("looks like the context syscall did not fail. No promises. Be sure to check you dmesg dump\n")
+else:
+    print("Invalid context!\n Valid contexts:'poem', 'short_novel', 'medium_novel', 'large_novel', 'super_novel', 'no_context'\n") 
+    exit()
+if (syscall(syscall_num_scriptfs_state, scriptfs_util_userspace.scriptfs_state.scriptfs_state_MOUNT.value) == -1):
+    print("It looks like the syscall to change state failed!")
+    exit()
+if(syscall(syscall_num_scriptfs_context, context_dir[context]) == -1):
+    print("It looks like the sysall to change context failed!")
+    exit()
+
+#exit()
+#if len(sys.argv)>5:
+    #times_to_write = sys.argv[5]
 if mode == "seq" and cache_strategy=="wr_through":
     sequential_writethrough(file_name, size)
 

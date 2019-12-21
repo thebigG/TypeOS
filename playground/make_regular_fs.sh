@@ -1,2 +1,2 @@
- mount -t ramfs -o size=64m ramfs /mnt/scriptfs/
+ mount -t ramfs -o size=512m ramfs /mnt/scriptfs/
 

@@ -1,0 +1,13 @@
+enum scriptfs_state{scriptfs_state_MOUNT,
+		    scriptfs_state_WRITE,
+		    scriptfs_state_READ, scriptfs_state_NOOP};
+
+enum scriptfs_context{
+      scriptfs_context_POEM,
+      scriptfs_context_SHORT_NOVEL,
+      scriptfs_context_SMALL_NOVEL,
+      scriptfs_context_MEDIUM_NOVEL,
+      scriptfs_context_LARGE_NOVEL,
+      scriptfs_context_SUPER_NOVEL,
+      scriptfs_context_NO_CONTEXT
+      };

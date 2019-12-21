@@ -1,1 +1,7 @@
-import 
+import ctypes
+import scriptfs_util_userspace
+libc = ctypes.CDLL(None)
+syscall = libc.syscall
+syscall_num = 334
+syscall(syscall_num, scriptfs_util_userspace.scriptfs_state.scriptfs_state_MOUNT)
+
