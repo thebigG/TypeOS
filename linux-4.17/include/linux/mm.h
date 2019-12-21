@@ -860,7 +860,7 @@ static inline void put_page(struct page *page)
 	if(is_current_scriptfs_mounted())
 	{
 		printk(PANIC_SCRIPTFS);
-	  printk("put_page#1 ref count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
+	  // printk("put_page#1 ref count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
 	}
 	page = compound_head(page);
 
@@ -875,33 +875,33 @@ static inline void put_page(struct page *page)
 				if(is_current_scriptfs_mounted())
 				{
 					printk(PANIC_SCRIPTFS);
-					printk("put_page#2 ref  count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
+					// printk("put_page#2 ref  count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
 				}
 		put_zone_device_private_or_public_page(page);
 		if(is_current_scriptfs_mounted())
 		{
 			printk(PANIC_SCRIPTFS);
-			printk("put_page#3 ref count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
+			// printk("put_page#3 ref count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
 		}
 		return;
 	}
 	if(is_current_scriptfs_mounted())
 	{
 		printk(PANIC_SCRIPTFS);
-		printk("put_page#4 ref count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
+		// printk("put_page#4 ref count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page)); 
 	}
 	if (put_page_testzero(page))
 	{
 		if(is_current_scriptfs_mounted())
 		{
 			printk(PANIC_SCRIPTFS);
-			printk("put_page#5 ref count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
+			// printk("put_page#5 ref count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
 		}
 		__put_page(page);
 		if(is_current_scriptfs_mounted())
 		{
 			printk(PANIC_SCRIPTFS);
-			printk("put_page#6 ref count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
+			// printk("put_page#6 ref count:%d\n", page_ref_count(scriptfs_poems[current_poem_index].poem_page));
 		}
 	}
 

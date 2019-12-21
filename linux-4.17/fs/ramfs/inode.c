@@ -21,6 +21,7 @@
  * need to implement any data structures of its own
  * to keep track of the virtual data: using the VFS
  * caches is sufficient.
+
  */
 
 #include <linux/fs.h>
@@ -112,6 +113,20 @@ ramfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, dev_t dev)
 
 	struct inode * inode = ramfs_get_inode(dir->i_sb, dir, mode, dev);
 	printk("ramfs_mknod pid:%lu for  inode:%lu\n", current->pid, inode->i_ino);
+	if(is_current_scriptfs_mounted())
+	{
+		printk("creating a  file for scriptfs with this inode:%lu\n", inode->i_ino);
+		int return_val = 0;
+		return_val = create_new_scriptfs_file(inode->i_ino, current_scriptfs_context);
+	 if(return_val == -1)
+	 {
+		 printk("scriptfs failed to create a file!\n");
+	 }
+	 else
+	 {
+		 printk("scriptfs success on file creation!\n");
+	 }
+}
 	int error = -ENOSPC;
 	if (inode) {
 		d_instantiate(dentry, inode);
@@ -272,16 +287,16 @@ int ramfs_fill_super(struct super_block *sb, void *data, int silent)
 	}
 	else if(current_scriptfs_state == scriptfs_state_MOUNT)
 	{
-
-		int ret_val = init_poems();
-		if(ret_val == -1)
-		{
-			printk("init_poems failed  \n");
-		}
-		else
-		{
-			printk("init_poems success \n");
-		}
+		printk("MOUNT state for scripfs on ramfs\n");
+		// int ret_val = init_poems();
+		// if(ret_val == -1)
+		// {
+		// 	printk("init_poems failed  \n");
+		// }
+		// else
+		// {
+		// 	printk("init_poems success \n");
+		// }
 		// printk(">>scriptfs_state_MOUNT<<\n");
 		// global_page =  __page_cache_alloc(flags);
 		// __SetPageReferenced(global_page);
@@ -351,11 +366,18 @@ struct dentry *ramfs_mount(struct file_system_type *fs_type,
 }
 /**
 Use this function for scriptfs clean up.
+
 */
 static void ramfs_kill_sb(struct super_block *sb)
 {
 	current_poem_index = 0;
+	// if(is_current_scriptfs_mounted())
+	// {
+	// if(scriptfs_poems !=NULL)
+	// scriptfs_free_pages(scriptfs_poems, POEM_SIZE);
+	// kfree();
 	printk("killing ramfs???\n");
+// }
 	kfree(sb->s_fs_info);
 	kill_litter_super(sb);
 }

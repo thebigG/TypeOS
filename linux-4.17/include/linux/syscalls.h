@@ -80,6 +80,7 @@ union bpf_attr;
 #include <linux/quota.h>
 #include <linux/key.h>
 #include <trace/syscall.h>
+#include <linux/scriptfs_util.h>
 
 #ifdef CONFIG_ARCH_HAS_SYSCALL_WRAPPER
 /*
@@ -1267,6 +1268,7 @@ static inline long ksys_truncate(const char __user *pathname, loff_t length)
 {
 	return do_sys_truncate(pathname, length);
 }
-asmlinkage long sys_start_scriptfs(void);
+asmlinkage long sys_set_scriptfs_state(enum scriptfs_state);
 asmlinkage long sys_is_my_process(int);
+asmlinkage long sys_set_scriptfs_context(enum scriptfs_context);
 #endif

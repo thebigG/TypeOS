@@ -46,7 +46,7 @@
 #include <linux/bit_spinlock.h>
 #include <linux/pagevec.h>
 #include <trace/events/block.h>
-#include <linux/scriptfs_util.h>
+
 static int fsync_buffers_list(spinlock_t *lock, struct list_head *list);
 static int submit_bh_wbc(int op, int op_flags, struct buffer_head *bh,
 			 enum rw_hint hint, struct writeback_control *wbc);
@@ -200,247 +200,26 @@ __find_get_block_slow(struct block_device *bdev, sector_t block)
 	struct buffer_head *head;
 	struct page *page;
 	int all_mapped = 1;
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#1\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page:%d #1 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#1\n");
-		}
-	}
+
 	index = block >> (PAGE_SHIFT - bd_inode->i_blkbits);
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#2\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page:%d #1 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#2\n");
-		}
-	}
 	page = find_get_page_flags(bd_mapping, index, FGP_ACCESSED);
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#3\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page:%d #3 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#3\n");
-		}
-	}
 	if (!page)
-	{
-		if(is_current_scriptfs_mounted())
-		{
-			printk("__find_get_block_slow#4\n");
-			if(global_page)
-			{
-				printk("on __find_get_block_slow ref count for the global page:%d #4 \n",page_ref_count(global_page));
-			}
-			else
-			{
-				printk("global page is NULL on  __find_get_block_slow#4\n");
-			}
-		}
 		goto out;
-	}
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#5\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page:%d #5 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#5\n");
-		}
-	}
+
 	spin_lock(&bd_mapping->private_lock);
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#6\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page:%d #7 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#7\n");
-		}
-	}
 	if (!page_has_buffers(page))
-	{
-		if(is_current_scriptfs_mounted())
-		{
-			printk("__find_get_block_slow#8\n");
-			if(global_page)
-			{
-				printk("on __find_get_block_slow ref count for the global page:%d #9 \n",page_ref_count(global_page));
-			}
-			else
-			{
-				printk("global page is NULL on  __find_get_block_slow#9\n");
-			}
-		}
 		goto out_unlock;
-	}
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#10\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page:%d #10 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#10\n");
-		}
-	}
 	head = page_buffers(page);
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#11\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page:%d #11 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#11\n");
-		}
-	}
 	bh = head;
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#12\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page:%d #12 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#13\n");
-		}
-	}
 	do {
 		if (!buffer_mapped(bh))
-		{
-			if(is_current_scriptfs_mounted())
-			{
-				printk("__find_get_block_slow#14\n");
-				if(global_page)
-				{
-					printk("on __find_get_block_slow ref count for the global page:%d #14 \n",page_ref_count(global_page));
-				}
-				else
-				{
-					printk("global page is NULL on  __find_get_block_slow#14\n");
-				}
-			}
 			all_mapped = 0;
-			if(is_current_scriptfs_mounted())
-			{
-				printk("__find_get_block_slow#15\n");
-				if(global_page)
-				{
-					printk("on __find_get_block_slow ref count for the global page:%d #15 \n",page_ref_count(global_page));
-				}
-				else
-				{
-					printk("global page is NULL on  __find_get_block_slow#15\n");
-				}
-			}
-
-		}
-		// if(is_current_scriptfs_mounted())
-		// {
-		// 	printk("__find_get_block_slow#16\n");
-		// 	if(global_page)
-		// 	{
-		// 		printk("on __find_get_block_slow ref count for the global page:%d #16 \n",page_ref_count(global_page));
-		// 	}
-		// 	else
-		// 	{
-		// 		printk("global page is NULL on  __find_get_block_slow#16\n");
-		// 	}
-		// }
 		else if (bh->b_blocknr == block) {
-			if(is_current_scriptfs_mounted())
-			{
-				printk("__find_get_block_slow#17\n");
-				if(global_page)
-				{
-					printk("on __find_get_block_slow ref count for the global page:%d #17\n",page_ref_count(global_page));
-				}
-				else
-				{
-					printk("global page is NULL on  __find_get_block_slow#17\n");
-				}
-			}
 			ret = bh;
-			if(is_current_scriptfs_mounted())
-			{
-				printk("__find_get_block_slow#18\n");
-				if(global_page)
-				{
-					printk("on __find_get_block_slow ref count for the global page:%d #18 \n",page_ref_count(global_page));
-				}
-				else
-				{
-					printk("global page is NULL on  __find_get_block_slow#18\n");
-				}
-			}
 			get_bh(bh);
-			if(is_current_scriptfs_mounted())
-			{
-				printk("__find_get_block_slow#19\n");
-				if(global_page)
-				{
-					printk("on __find_get_block_slow ref count for the global page:%d #19 \n",page_ref_count(global_page));
-				}
-				else
-				{
-					printk("global page is NULL on  __find_get_block_slow#19\n");
-				}
-			}
 			goto out_unlock;
 		}
-		if(is_current_scriptfs_mounted())
-		{
-			printk("__find_get_block_slow#1\n");
-			if(global_page)
-			{
-				printk("on __find_get_block_slow ref count for the global page:%d #20 \n",page_ref_count(global_page));
-			}
-			else
-			{
-				printk("global page is NULL on  __find_get_block_slow#20\n");
-			}
-		}
 		bh = bh->b_this_page;
-		if(is_current_scriptfs_mounted())
-		{
-			printk("__find_get_block_slow#21\n");
-			if(global_page)
-			{
-				printk("on __find_get_block_slow ref count for the global page:%d #21 \n",page_ref_count(global_page));
-			}
-			else
-			{
-				printk("global page is NULL on  __find_get_block_slow#21\n");
-			}
-		}
 	} while (bh != head);
 
 	/* we might be here because some of the buffers on this page are
@@ -448,31 +227,7 @@ __find_get_block_slow(struct block_device *bdev, sector_t block)
 	 * file io on the block device and getblk.  It gets dealt with
 	 * elsewhere, don't buffer_error if we had some unmapped buffers
 	 */
-	 if(is_current_scriptfs_mounted())
-	 {
-		 printk("__find_get_block_slow#22\n");
-		 if(global_page)
-		 {
-			 printk("on __find_get_block_slow ref count for the global page:%d #22 \n",page_ref_count(global_page));
-		 }
-		 else
-		 {
-			 printk("global page is NULL on  __find_get_block_slow#22\n");
-		 }
-	 }
 	if (all_mapped) {
-		if(is_current_scriptfs_mounted())
-		{
-			printk("__find_get_block_slow#23\n");
-			if(global_page)
-			{
-				printk("on __find_get_block_slow ref count for the global page:%d #23 \n",page_ref_count(global_page));
-			}
-			else
-			{
-				printk("global page is NULL on  __find_get_block_slow#23\n");
-			}
-		}
 		printk("__find_get_block_slow() failed. "
 			"block=%llu, b_blocknr=%llu\n",
 			(unsigned long long)block,
@@ -481,98 +236,11 @@ __find_get_block_slow(struct block_device *bdev, sector_t block)
 			bh->b_state, bh->b_size);
 		printk("device %pg blocksize: %d\n", bdev,
 			1 << bd_inode->i_blkbits);
-			if(is_current_scriptfs_mounted())
-			{
-				printk("__find_get_block_slow#24\n");
-				if(global_page)
-				{
-					printk("on __find_get_block_slow ref count for the global page:%d #24 \n",page_ref_count(global_page));
-				}
-				else
-				{
-					printk("global page is NULL on  __find_get_block_slow#24\n");
-				}
-			}
-	}
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#25\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page:%d #25 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#25\n");
-		}
 	}
 out_unlock:
-if(is_current_scriptfs_mounted())
-{
-	printk("__find_get_block_slow#26\n");
-	if(global_page)
-	{
-		printk("on __find_get_block_slow ref count for the global page:%d #26 \n",page_ref_count(global_page));
-	}
-	else
-	{
-		printk("global page is NULL on  __find_get_block_slow#26\n");
-	}
-}
-if(is_current_scriptfs_mounted())
-{
-	printk("__find_get_block_slow#27\n");
-	if(global_page)
-	{
-		printk("on __find_get_block_slow ref count for the global page:%d #27 \n",page_ref_count(global_page));
-	}
-	else
-	{
-		printk("global page is NULL on  __find_get_block_slow#27\n");
-	}
-}
 	spin_unlock(&bd_mapping->private_lock);
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#28\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page(removed put_page()):%d #28 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#28\n");
-		}
-	}
-	if(page != global_page)
-	{
 	put_page(page);
-}
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block_slow#29\n");
-		if(global_page)
-		{
-			printk("on __find_get_block_slow ref count for the global page:%d #29 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block_slow#29\n");
-		}
-	}
 out:
-if(is_current_scriptfs_mounted())
-{
-	printk("__find_get_block_slow#31\n");
-	if(global_page)
-	{
-		printk("on __find_get_block_slow ref count for the global page:%d #31 \n",page_ref_count(global_page));
-	}
-	else
-	{
-		printk("global page is NULL on  __find_get_block_slow#31\n");
-	}
-}
 	return ret;
 }
 
@@ -1258,41 +926,9 @@ grow_dev_page(struct block_device *bdev, sector_t block,
 	sector_t end_block;
 	int ret = 0;		/* Will call free_more_memory() */
 	gfp_t gfp_mask;
-	if(is_current_scriptfs_mounted())
-	{
-		printk("grow_dev_page#1\n");
-		if(global_page)
-		{
-			printk("ref count for the global page:%d #1 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  grow_dev_page\n");
-		}
-	}
 
-	if(is_scriptfs_pid())
-	{
-		printk("grow_dev_page-->NON-sciprtfs#1\n");
-	}
 	gfp_mask = mapping_gfp_constraint(inode->i_mapping, ~__GFP_FS) | gfp;
-	if(is_current_scriptfs_mounted())
-	{
-		printk("grow_dev_page#2\n");
-		if(global_page)
-		{
-			printk("ref count for the global page:%d #1 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL\n");
-		}
-	}
-	if(is_scriptfs_pid())
-	{
-		printk("grow_dev_page-->NON-sciprtfs#2\n");
 
-	}
 	/*
 	 * XXX: __getblk_slow() can not really deal with failure and
 	 * will endlessly loop on improvised global reclaim.  Prefer
@@ -1302,42 +938,9 @@ grow_dev_page(struct block_device *bdev, sector_t block,
 	gfp_mask |= __GFP_NOFAIL;
 
 	page = find_or_create_page(inode->i_mapping, index, gfp_mask);
-	if(is_current_scriptfs_mounted())
-	{
-		if(page == global_page)
-		{
-			printk("on grow_dev_page-->" PANIC_SCRIPTFS);
-		}
-		if(global_page)
-		{
-			printk("ref count for the global page:%d #1 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL\n");
-		}
-		printk("grow_dev_page#3\n");
-	}
-	if(is_scriptfs_pid())
-	{
-		printk("grow_dev_page-->NON-sciprtfs#3\n");
-	}
-	// if(!is_current_scriptfs_mounted())
-	{
+
 	BUG_ON(!PageLocked(page));
-}
-	if(is_current_scriptfs_mounted())
-	{
-		if(page == global_page)
-		{
-			printk(PANIC_SCRIPTFS);
-		}
-		printk("grow_dev_page#4\n");
-	}
-	if(is_scriptfs_pid())
-	{
-		printk("grow_dev_page-->NON-sciprtfs#4\n");
-	}
+
 	if (page_has_buffers(page)) {
 		bh = page_buffers(page);
 		if (bh->b_size == size) {
@@ -1348,18 +951,6 @@ grow_dev_page(struct block_device *bdev, sector_t block,
 		}
 		if (!try_to_free_buffers(page))
 			goto failed;
-	}
-	if(is_current_scriptfs_mounted())
-	{
-		if(page == global_page)
-		{
-			printk(PANIC_SCRIPTFS);
-		}
-		printk("grow_dev_page#5\n");
-	}
-	if(is_scriptfs_pid())
-	{
-		printk("grow_dev_page-->NON-sciprtfs#5\n");
 	}
 
 	/*
@@ -1415,17 +1006,6 @@ grow_buffers(struct block_device *bdev, sector_t block, int size, gfp_t gfp)
 	}
 
 	/* Create a page with the proper size buffers.. */
-	if(is_current_scriptfs_mounted())
-	{
-		if(global_page)
-		{
-		printk("on  grow_buffers() --> ref count%d \n", page_ref_count(global_page) );
-	}
-	else
-	{
-		printk("page is NULL on grow_buffers\n");
-	}
-	}
 	return grow_dev_page(bdev, block, index, size, sizebits, gfp);
 }
 
@@ -1433,17 +1013,6 @@ static struct buffer_head *
 __getblk_slow(struct block_device *bdev, sector_t block,
 	     unsigned size, gfp_t gfp)
 {
-	if(is_current_scriptfs_mounted())
-	{
-		if(global_page)
-		{
-		printk("#1on  __getblk_slow() --> ref count%d \n", page_ref_count(global_page) );
-	}
-	else
-	{
-		printk("#2page is NULL on __getblk_slow\n");
-	}
-	}
 	/* Size must be multiple of hard sectorsize */
 	if (unlikely(size & (bdev_logical_block_size(bdev)-1) ||
 			(size < 512 || size > PAGE_SIZE))) {
@@ -1455,108 +1024,18 @@ __getblk_slow(struct block_device *bdev, sector_t block,
 		dump_stack();
 		return NULL;
 	}
-	if(is_current_scriptfs_mounted())
-	{
-		if(global_page)
-		{
-		printk("#2on  __getblk_slow() --> ref count%d \n", page_ref_count(global_page) );
-	}
-	else
-	{
-		printk("#2page is NULL on __getblk_slow\n");
-	}
-	}
 
 	for (;;) {
-
 		struct buffer_head *bh;
 		int ret;
-		if(is_current_scriptfs_mounted())
-		{
-			if(global_page)
-			{
-			printk("#3on  __getblk_slow() --> ref count%d \n", page_ref_count(global_page) );
-		}
-		else
-		{
-			printk("#3page is NULL on __getblk_slow\n");
-		}
-		}
+
 		bh = __find_get_block(bdev, block, size);
-		if(is_current_scriptfs_mounted())
-		{
-			if(global_page)
-			{
-			printk("#4on  __getblk_slow() --> ref count%d \n", page_ref_count(global_page) );
-		}
-		else
-		{
-			printk("#4page is NULL on __getblk_slow\n");
-		}
-		}
 		if (bh)
-		{		if(is_current_scriptfs_mounted())
-				{
-					if(global_page)
-					{
-					printk("#5on  __getblk_slow() --> ref count%d \n", page_ref_count(global_page) );
-				}
-				else
-				{
-					printk("#5page is NULL on __getblk_slow\n");
-				}
-				}
 			return bh;
-		}
-		if(is_current_scriptfs_mounted())
-		{
-			if(global_page)
-			{
-			printk("#6on  __getblk_slow() --> ref count%d \n", page_ref_count(global_page) );
-		}
-		else
-		{
-			printk("#6page is NULL on __getblk_slow\n");
-		}
-		}
+
 		ret = grow_buffers(bdev, block, size, gfp);
-		if(is_current_scriptfs_mounted())
-		{
-			if(global_page)
-			{
-			printk("#7on  __getblk_slow() --> ref count%d \n", page_ref_count(global_page) );
-		}
-		else
-		{
-			printk("#7page is NULL on __getblk_slow\n");
-		}
-		}
 		if (ret < 0)
-		{
-			if(is_current_scriptfs_mounted())
-			{
-				if(global_page)
-				{
-				printk("#8on  __getblk_slow() --> ref count%d \n", page_ref_count(global_page) );
-			}
-			else
-			{
-				printk("#8page is NULL on __getblk_slow\n");
-			}
-			}
 			return NULL;
-		}
-	}
-	if(is_current_scriptfs_mounted())
-	{
-		if(global_page)
-		{
-		printk("#3on  __getblk_slow() --> ref count%d \n", page_ref_count(global_page) );
-	}
-	else
-	{
-		printk("#3page is NULL on __getblk_slow\n");
-	}
 	}
 }
 
@@ -1802,126 +1281,14 @@ struct buffer_head *
 __find_get_block(struct block_device *bdev, sector_t block, unsigned size)
 {
 	struct buffer_head *bh = lookup_bh_lru(bdev, block, size);
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block#1\n");
-		if(global_page)
-		{
-			printk("on __find_get_block--> ref count for the global page:%d #1 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block#1\n");
-		}
-	}
+
 	if (bh == NULL) {
-		if(is_current_scriptfs_mounted())
-		{
-			printk("__find_get_block#2\n");
-			if(global_page)
-			{
-				printk("on __find_get_block--> ref count for the global page:%d #2 \n",page_ref_count(global_page));
-			}
-			else
-			{
-				printk("global page is NULL on  __find_get_block#2\n");
-			}
-		}
 		/* __find_get_block_slow will mark the page accessed */
 		bh = __find_get_block_slow(bdev, block);
-		if(is_current_scriptfs_mounted())
-		{
-			printk("__find_get_block#3\n");
-			if(global_page)
-			{
-				printk("on __find_get_block--> ref count for the global page:%d #3 \n",page_ref_count(global_page));
-			}
-			else
-			{
-				printk("global page is NULL on  __find_get_block#3\n");
-			}
-		}
 		if (bh)
-		{
-			if(is_current_scriptfs_mounted())
-			{
-				printk("__find_get_block#4\n");
-				if(global_page)
-				{
-					printk("on __find_get_block--> ref count for the global page:%d #4 \n",page_ref_count(global_page));
-				}
-				else
-				{
-					printk("global page is NULL on  __find_get_block#4\n");
-				}
-			}
 			bh_lru_install(bh);
-			if(is_current_scriptfs_mounted())
-			{
-				printk("__find_get_block#5\n");
-				if(global_page)
-				{
-					printk("on __find_get_block--> ref count for the global page:%d #5 \n",page_ref_count(global_page));
-				}
-				else
-				{
-					printk("global page is NULL on  __find_get_block#5\n");
-				}
-			}
-			if(is_current_scriptfs_mounted())
-			{
-				printk("__find_get_block#6\n");
-				if(global_page)
-				{
-					printk("on __find_get_block--> ref count for the global page:%d #6 \n",page_ref_count(global_page));
-				}
-				else
-				{
-					printk("global page is NULL on  __find_get_block#6\n");
-				}
-			}
-		}
 	} else
-	{
-		if(is_current_scriptfs_mounted())
-		{
-			printk("__find_get_block#7\n");
-			if(global_page)
-			{
-				printk("on __find_get_block--> ref count for the global page:%d #7 \n",page_ref_count(global_page));
-			}
-			else
-			{
-				printk("global page is NULL on  __find_get_block#7\n");
-			}
-		}
 		touch_buffer(bh);
-		if(is_current_scriptfs_mounted())
-		{
-			printk("__find_get_block#8\n");
-			if(global_page)
-			{
-				printk("on __find_get_block--> ref count for the global page:%d #8 \n",page_ref_count(global_page));
-			}
-			else
-			{
-				printk("global page is NULL on  __find_get_block#8\n");
-			}
-		}
-
-	}
-	if(is_current_scriptfs_mounted())
-	{
-		printk("__find_get_block#9\n");
-		if(global_page)
-		{
-			printk("on __find_get_block--> ref count for the global page:%d #9 \n",page_ref_count(global_page));
-		}
-		else
-		{
-			printk("global page is NULL on  __find_get_block#9\n");
-		}
-	}
 
 	return bh;
 }

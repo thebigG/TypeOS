@@ -327,10 +327,34 @@ out:
 	return ret;
 }
 EXPORT_SYMBOL(simple_empty);
-
+/**
+Free pages from the file belonging
+to this inode on this function.
+dir:inode of the directory
+dentry:the dentry that's marked for deletion. This should be the file marked
+for deletion. For instance, if user were to
+"rm scriptfs/file1", then dentry points to file1.
+The wonderful linux developers fetch the inode of this
+file by calling d_inode() function.
+We then use this inode to find and delete the pages allocated by scriptfs!
+*/
 int simple_unlink(struct inode *dir, struct dentry *dentry)
 {
 	struct inode *inode = d_inode(dentry);
+	if(is_scriptfs_mounted())
+	{
+		printk("deleting this inode:%lu\n", inode->i_ino);
+		printk("deleting this dir inode:%lu\n", dir->i_ino);
+		printk("deleting this dentry name:%s\n", dentry->d_name.name);
+		if(delete_scriptfs_file(inode->i_ino)== -1)
+		{
+			printk("delete_scriptfs_file failed\n");
+		}
+		else
+		{
+			printk("delete_scriptfs_file successs!\n");
+		}
+	}
 
 	inode->i_ctime = dir->i_ctime = dir->i_mtime = current_time(inode);
 	drop_nlink(inode);

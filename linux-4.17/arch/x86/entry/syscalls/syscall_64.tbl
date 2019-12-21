@@ -342,7 +342,8 @@
 331	common	pkey_free		__x64_sys_pkey_free
 332	common	statx			__x64_sys_statx
 333 common  is_my_process __x64_sys_is_my_process
-334 common  start_scriptfs __x64_sys_start_scriptfs
+334 common  set_scriptfs_state __x64_sys_set_scriptfs_state
+335 common set_scriptfs_context __x64_sys_set_scriptfs_context
 #
 # x32-specific system call numbers start at 512 to avoid cache impact
 # for native 64-bit operation. The __x32_compat_sys stubs are created

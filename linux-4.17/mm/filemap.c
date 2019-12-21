@@ -1724,23 +1724,66 @@ struct page *pagecache_get_page(struct address_space *mapping, pgoff_t offset,
 			{
 				if(is_scriptfs_pid())
 				{
-				printk("fgp_flags & FGP_NOFS\n");
+				printk("fgp_flags & FGP_NOFS \n");
 			}
 				gfp_mask &= ~__GFP_FS;
 			}
 			if(is_current_scriptfs_mounted())
 			{
-				printk("pagecache_get_page#19\n");
+				printk(" pagecache_get_page#19\n");
 			}
 			/**
 			This if-else WORKS!
 			DO NOT change it. Please.
 			*/
-			if(is_current_scriptfs_mounted())
+			if(is_current_scriptfs_mounted()  )
 			{
-				printk("setting page to current poem page using this index:%d\n", current_poem_index);
-				page = scriptfs_poems[current_poem_index].poem_page;
-				current_poem_index++;
+				if(mapping== NULL)
+				{
+					printk("MAPPING is null\n");
+				}
+				else
+				{
+					printk("MAPPING is NOT null");
+					if(mapping->host)
+					{
+						printk("inode is NOT NULL\n");
+					}
+					else
+					{
+						printk("inode is NULL\n");
+					}
+				}
+				printk("normal NON-scriptfs code path\n");
+
+				// page = __page_cache_alloc(gfp_mask);
+				page = fetch_next_page(mapping->host->i_ino);
+				if(page == NULL)
+				{
+					printk("fetch_next_page failed. Allocating non-scriptfs page\n");
+					page = __page_cache_alloc(gfp_mask);
+				}
+				else
+				{
+					printk("fetch_next_page was successful!\n");
+				}
+				 // init_pages
+				// printk("setting page to current poem  page using this index:%d\n", current_poem_index);
+				// page = scriptfs_poems[current_poem_index].poem_page ;
+				// struct linked_list_pages* pages =  init_pages();
+				// int current_index;
+				// current_index = 0;
+				// page  =  init_pages(current_scriptfs_context)[current_index];
+				// current_index++;
+				// int k = 0;
+				// //some logic  from bitmap
+				// add_entry_bit_range_table(mapping->host->i_ino,k, k+ get_context_bitmapp_offset(current_scriptfs_context) );
+				// int i = 0;
+				// while(i<current_index)
+				// {
+				//
+				// }
+				// current_poem_index++;
 				printk("current offset:%lu\n", offset);
 				if(page->next == NULL)
 				{
@@ -1797,6 +1840,7 @@ struct page *pagecache_get_page(struct address_space *mapping, pgoff_t offset,
 			if(is_current_scriptfs_mounted())
 			{
 				printk("pagecache_get_page#25\n");
+				printk("nid for this page:%d\n", page_to_nid(page));
 			}
 			if (unlikely(err))
 			{
@@ -3394,7 +3438,7 @@ struct page *grab_cache_page_write_begin(struct address_space *mapping,
 	{
 		//scriptfs routine starts
 		printk("grab_cache_page_write_begin#1\n");
-		page = global_page;
+		// page = global_page;
 		printk("grab_cache_page_write_begin#2\n");
 		int fgp_flags = FGP_LOCK|FGP_WRITE|FGP_CREAT;
 		printk("grab_cache_page_write_begin#3\n");
