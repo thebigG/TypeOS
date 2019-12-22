@@ -21,4 +21,4 @@ A context-based file system that will hopefully make a writer's laptop last a 40
 
 | Version  | description  |
 |---|---|
-| 1.0  | Fixed issue where kernel was not booting. This was caused by trying to access the "current" macro boot time  |
+| 1.0  | Fixed issue where the kernel was not booting. This was caused by trying to access the "current" macro at boot time  |
