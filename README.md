@@ -16,3 +16,9 @@ A context-based file system that will hopefully make a writer's laptop last a 40
 | Medium Novel  | 512KB  | 128  |
 | Large Novel  | 2MB  | 512  |
 |Super Novel   | 256MB  | 64K  |
+
+#scriptfs stable changelog
+
+| Version  | description  |
+|---|---|
+| 1.0  | Fixed issue where kernel was not booting. This was caused by trying to access the "current" macro boot time  |

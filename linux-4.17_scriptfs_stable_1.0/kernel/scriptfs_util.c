@@ -96,7 +96,7 @@ struct page** init_pages(enum scriptfs_context new_context)
     {
       printk("pre-allocation successful!\n");
     }
-    new_pages[i].scriptfs_flag = SCRIPTFS_PAGE_FLAG_KEY;
+    // new_pages[i]->scriptfs_flag = SCRIPTFS_PAGE_FLAG_KEY;
     __SetPageReferenced(new_pages[i]);
     // __SetPageReferenced(scriptfs_poems[i].poem_page); //maybe doing this is not such a good idea(?)
     i++;
@@ -281,6 +281,7 @@ struct page* fetch_next_page(unsigned long inode)
     }
     head = head->next;
   }
+  return NULL;
 }
 int get_context_page_size(enum scriptfs_context new_context)
 {
@@ -315,4 +316,5 @@ int scriptfs_free_pages(struct page** pages, int num_pages)
     put_page(pages[i]);
     i++;
   }
+  return 0;
 }

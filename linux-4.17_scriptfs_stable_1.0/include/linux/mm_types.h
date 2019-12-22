@@ -77,7 +77,7 @@ struct hmm;
 
 struct page {
 	/* First double word block */
-	char scriptfs_flag; // this is used to check if this page was allocated by the scriptfs file system 
+	// char scriptfs_flag; // this is used to check if this page was allocated by the scriptfs file system 
 	unsigned long flags;		/* Atomic flags, some possibly
 					 * updated asynchronously */
 	union {
