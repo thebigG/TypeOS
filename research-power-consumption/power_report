@@ -1,0 +1,480 @@
+____________________________________________________________________
+			P o w e r T O P
+
+____________________________________________________________________
+ *  *  *   System Information   *  *  *
+
+PowerTOP Version;v2.9 ran at Fri Oct 11 08:52:22 2019
+
+Kernel Version;Linux version 4.15.0-65-generic
+System Name;Apple Inc.Mac-6F01561E16C75D061.0
+CPU Information;4 Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz
+OS Information;Linux Mint 19.2
+
+Target: 1 units/s;System:  504.3 wakeup/s;CPU:  7.8% usage;GPU: 0 ops/s;GFX: 21.5 wakeups/s;VFS: 0 ops/s;
+
+____________________________________________________________________
+ *  *  *   Top 10 Power Consumers   *  *  *
+
+Usage;Events/s;Category;Description
+100.0%;;Device;Audio codec hwC0D3: Intel
+100.0%;;Device;Audio codec hwC0D0: Cirrus Logic
+  0.2%; 98.4;Process;[PID 12054] /usr/lib/firefox/firefox -contentproc -childID 32 -isForBrowser -prefsLen 9179 -prefMapSize 200973 -parentBuildID 2
+  3.1%; 37.4;Process;[PID 3333] cinnamon --replace 
+  0.5%; 44.5;Process;[PID 25945] /opt/atom/atom --executed-from=/home/digital_alchemist/power_gadget --pid=25932 . 
+  0.0%; 26.7;Timer;tick_sched_timer
+  0.1%; 23.6;Process;[PID 13109] /usr/lib/firefox/firefox -contentproc -childID 25 -isForBrowser -prefsLen 7704 -prefMapSize 200973 -parentBuildID 2
+  0.1%; 23.7;Process;[PID 9092] /usr/lib/firefox/firefox -contentproc -childID 32 -isForBrowser -prefsLen 9179 -prefMapSize 200973 -parentBuildID 20
+  0.1%; 20.6;Process;[PID 25973] /opt/atom/atom --executed-from=/home/digital_alchemist/power_gadget --pid=25932 . 
+  0.1%; 20.4;Process;[PID 3796] /usr/lib/firefox/firefox -contentproc -childID 4 -isForBrowser -prefsLen 6183 -prefMapSize 200973 -parentBuildID 201
+
+____________________________________________________________________
+ *  *  *   Processor Idle State Report   *  *  *
+
+Package;0
+C2 (pc2);  2.8%
+C3 (pc3);  0.0%
+C6 (pc6);  3.0%
+C7 (pc7); 75.4%
+;
+;
+;
+
+;Core 0
+C3 (cc3);  0.1%
+C6 (cc6);  0.0%
+C7 (cc7); 94.6%
+;Core 1
+C3 (cc3);  0.1%
+C6 (cc6);  0.0%
+C7 (cc7); 94.1%
+;GPU 805909293
+Powered On; 10.6%
+RC6;  8.4%
+RC6p; 81.1%
+RC6pp;  0.0%
+
+CPU;0;CPU;2
+C0 active;  2.6%;  1.9%;
+POLL;  0.0%;   0.0 ms;  0.0%;   0.0 ms
+C1E;  0.2%;   0.7 ms;  0.0%;   0.2 ms
+;
+C3;  0.1%;   0.3 ms;  0.1%;   0.3 ms
+C6;  0.0%;   0.0 ms;  0.0%;   0.0 ms
+C7; 97.0%;   7.4 ms; 97.8%;   6.7 ms
+CPU;1;CPU;3
+C0 active;  2.9%;  2.8%;
+POLL;  0.0%;   0.0 ms;  0.0%;   0.0 ms
+C1E;  0.1%;   1.6 ms;  0.1%;   0.4 ms
+;
+C3;  0.1%;   0.3 ms;  0.0%;   0.3 ms
+C6;  0.0%;   0.2 ms;  0.0%;   0.0 ms
+C7; 97.1%;   9.3 ms; 97.1%;   9.2 ms
+;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+
+____________________________________________________________________
+ *  *  *   Processor Frequency Report   *  *  *
+
+Package;0
+Idle;
+1200 MHz;
+3.10 GHz;
+;
+;
+;
+
+;Core 0
+Idle;
+1200 MHz;
+3.10 GHz;
+;Core 1
+Idle;
+1200 MHz;
+3.10 GHz;
+;
+;
+;
+;
+;
+
+CPU 0;CPU 2
+Average;2.7 GHz;2.6 GHz
+Idle;
+1200 MHz;
+3.10 GHz;
+CPU 1;CPU 3
+Average;2.8 GHz;2.8 GHz
+Idle;
+1200 MHz;
+3.10 GHz;
+;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+
+____________________________________________________________________
+ *  *  *   Overview of Software Power Consumers   *  *  *
+
+Usage;Wakeups/s;GPU ops/s;Disk IO/s;GFX Wakeups/s;Category;Description
+  2.1 ms/s; 98.4;;;;Process;[PID 12054] /usr/lib/firefox/firefox -contentproc -childID 32 -isForBrowser -prefsLen 9179 -prefMapSize 200973 -parentBuildID 2
+ 30.8 ms/s; 37.4;;; 12.8;Process;[PID 3333] cinnamon --replace 
+  4.7 ms/s; 44.5;;;;Process;[PID 25945] /opt/atom/atom --executed-from=/home/digital_alchemist/power_gadget --pid=25932 . 
+494.0 us/s; 26.7;;;;Timer;tick_sched_timer
+  1.1 ms/s; 23.6;;;;Process;[PID 13109] /usr/lib/firefox/firefox -contentproc -childID 25 -isForBrowser -prefsLen 7704 -prefMapSize 200973 -parentBuildID 2
+  1.0 ms/s; 23.7;;;;Process;[PID 9092] /usr/lib/firefox/firefox -contentproc -childID 32 -isForBrowser -prefsLen 9179 -prefMapSize 200973 -parentBuildID 20
+  1.2 ms/s; 20.6;;;;Process;[PID 25973] /opt/atom/atom --executed-from=/home/digital_alchemist/power_gadget --pid=25932 . 
+  1.0 ms/s; 20.4;;;;Process;[PID 3796] /usr/lib/firefox/firefox -contentproc -childID 4 -isForBrowser -prefsLen 6183 -prefMapSize 200973 -parentBuildID 201
+451.6 us/s; 19.1;;;;Process;[PID 26067] /opt/atom/atom --type=renderer --enable-experimental-web-platform-features --no-sandbox --primordial-pipe-token=65D
+  3.0 ms/s; 12.2;;;  5.2;Process;[PID 2455] /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch 
+  2.9 ms/s; 13.3;;;;Timer;hrtimer_wakeup
+  2.2 ms/s; 12.1;;;;Process;[PID 13096] /usr/lib/firefox/firefox -contentproc -childID 25 -isForBrowser -prefsLen 7704 -prefMapSize 200973 -parentBuildID 2
+  1.2 ms/s; 11.7;;;;Interrupt;[6] tasklet(softirq)
+ 81.8 us/s; 10.8;;;;Process;[PID 8] [rcu_sched]
+  2.9 ms/s;  9.6;;;;Process;[PID 3782] /usr/lib/firefox/firefox -contentproc -childID 4 -isForBrowser -prefsLen 6183 -prefMapSize 200973 -parentBuildID 201
+  1.8 ms/s;  9.8;;;;Process;[PID 9079] /usr/lib/firefox/firefox -contentproc -childID 32 -isForBrowser -prefsLen 9179 -prefMapSize 200973 -parentBuildID 20
+229.4 us/s;  9.8;;;;Process;[PID 11942] /usr/lib/firefox/firefox 
+  1.1 ms/s;  6.8;;;  1.6;Process;[PID 10097] /usr/lib/gnome-terminal/gnome-terminal-server 
+  2.6 ms/s;  3.6;;;  0.4;Process;[PID 11188] xed
+121.5 us/s;  4.6;;;;Interrupt;[4] block(softirq)
+  2.0 ms/s;  3.7;;;;Process;[PID 21282] /usr/lib/firefox/firefox -contentproc -childID 27 -isForBrowser -prefsLen 9058 -prefMapSize 200973 -parentBuildID 2
+ 13.3 us/s;  4.1;;;;Timer;ehci_hrtimer_func
+ 18.3 us/s;  4.1;;;;kWork;gen6_pm_rps_work
+  1.1 ms/s;  3.2;;;;Process;[PID 10749] /usr/lib/firefox/firefox -contentproc -childID 18 -isForBrowser -prefsLen 7704 -prefMapSize 200973 -parentBuildID 2
+155.6 us/s;  3.5;;;;Process;[PID 21333] /usr/lib/firefox/firefox -contentproc -childID 28 -isForBrowser -prefsLen 9058 -prefMapSize 200973 -parentBuildID 2
+ 70.2 us/s;  3.3;;;;Process;[PID 5060] /usr/bin/containerd 
+154.1 us/s;  3.2;;;;Process;[PID 21295] /usr/lib/firefox/firefox -contentproc -childID 27 -isForBrowser -prefsLen 9058 -prefMapSize 200973 -parentBuildID 2
+221.6 us/s;  2.8;;;;Interrupt;[45] i915
+311.0 us/s;  2.7;;;  0.0;Process;[PID 11194] gdbus
+ 39.0 us/s;  2.8;;;;Process;[PID 213] [i915/signal:0]
+143.7 us/s;  2.7;;;;Process;[PID 10768] /usr/lib/firefox/firefox -contentproc -childID 18 -isForBrowser -prefsLen 7704 -prefMapSize 200973 -parentBuildID 2
+110.9 us/s;  2.7;;;;Process;[PID 3653] /usr/lib/firefox/firefox -contentproc -childID 1 -isForBrowser -prefsLen 1 -prefMapSize 200973 -parentBuildID 201909
+ 69.6 us/s;  2.2;;;  1.3;Process;[PID 3151] /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-keyboard 
+351.9 us/s;  2.4;;;;Process;[PID 25993] /opt/atom/atom --type=renderer --enable-experimental-web-platform-features --no-sandbox --primordial-pipe-token=65D
+449.0 us/s;  2.3;;;;Process;[PID 1949] /usr/sbin/NetworkManager --no-daemon 
+695.5 us/s;  2.2;;;;Process;[PID 3570] /usr/lib/firefox/firefox 
+498.3 us/s;  2.1;;;;Process;[PID 21319] /usr/lib/firefox/firefox -contentproc -childID 28 -isForBrowser -prefsLen 9058 -prefMapSize 200973 -parentBuildID 2
+  3.1 us/s;  2.0;;;;kWork;intel_atomic_helper_free_state_
+ 52.0 us/s;  2.0;;;;Process;[PID 2432] /usr/bin/containerd 
+  1.8 ms/s;  1.3;;;;Interrupt;[7] sched(softirq)
+  0.0 us/s;  2.0;;;;kWork;intel_atomic_commit_work
+347.9 us/s;  1.8;;;;Process;[PID 3638] /usr/lib/firefox/firefox -contentproc -childID 1 -isForBrowser -prefsLen 1 -prefMapSize 200973 -parentBuildID 201909
+ 61.5 us/s;  1.5;;;;Process;[PID 8644] /usr/lib/firefox/firefox -contentproc -childID 30 -isForBrowser -prefsLen 9178 -prefMapSize 200973 -parentBuildID 20
+364.4 us/s;  1.3;;;;Process;[PID 8632] /usr/lib/firefox/firefox -contentproc -childID 30 -isForBrowser -prefsLen 9178 -prefMapSize 200973 -parentBuildID 20
+  0.0 us/s;  1.2;;;;kWork;i915_gem_idle_work_handler
+  3.1 ms/s;;;;;Timer;wl_timer
+222.2 us/s;  1.1;;;;Process;[PID 3713] /usr/lib/firefox/firefox -contentproc -childID 3 -isForBrowser -prefsLen 254 -prefMapSize 200973 -parentBuildID 2019
+155.0 us/s;  1.0;;;;Process;[PID 3366] nm-applet 
+ 34.9 us/s;  1.0;;;;Process;[PID 10762] /usr/lib/firefox/firefox -contentproc -childID 18 -isForBrowser -prefsLen 7704 -prefMapSize 200973 -parentBuildID 2
+ 34.6 us/s;  1.0;;;;Process;[PID 21327] /usr/lib/firefox/firefox -contentproc -childID 28 -isForBrowser -prefsLen 9058 -prefMapSize 200973 -parentBuildID 2
+  7.9 us/s;  0.9;;;;kWork;vmstat_shepherd
+  4.9 us/s;  0.9;;;;Timer;sched_rt_period_timer
+ 90.9 us/s;  0.8;;;;Process;[PID 11195] dconf worker
+ 41.2 us/s;  0.8;;;;Process;[PID 3733] /usr/lib/firefox/firefox -contentproc -childID 3 -isForBrowser -prefsLen 254 -prefMapSize 200973 -parentBuildID 2019
+ 31.4 us/s;  0.6;;;;Process;[PID 25976] /opt/atom/atom --type=gpu-process --no-sandbox --supports-dual-gpus=false --gpu-driver-bug-workarounds=1,7,15,23,61
+ 23.5 us/s;  0.6;;;;Process;[PID 3726] /usr/lib/firefox/firefox -contentproc -childID 3 -isForBrowser -prefsLen 254 -prefMapSize 200973 -parentBuildID 2019
+128.8 us/s;  0.5;;;;Process;[PID 2493] /usr/bin/containerd 
+115.5 us/s;  0.5;;;;kWork;disk_events_workfn
+ 19.3 us/s;  0.5;;;;kWork;__i915_gem_free_work
+  1.9 us/s;  0.4;;;;kWork;blk_delay_work
+  8.1 us/s;  0.4;;;;kWork;i915_gem_retire_work_handler
+ 31.0 us/s;  0.3;;;;Process;[PID 25970] /opt/atom/atom --type=gpu-process --no-sandbox --supports-dual-gpus=false --gpu-driver-bug-workarounds=1,7,15,23,61
+ 10.1 us/s;  0.3;;;;Process;[PID 2477] /usr/bin/containerd 
+  0.7 us/s;  0.3;;;;Timer;intel_uncore_fw_release_timer
+ 32.3 us/s; 0.30;;;;Process;[PID 3359] nemo-desktop 
+ 32.6 us/s; 0.25;;;  0.1;Process;[PID 3031] /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session 
+  0.7 us/s; 0.30;;;;kWork;cfq_kick_queue
+ 91.1 us/s; 0.25;;;;Process;[PID 3164] /usr/lib/dconf/dconf-service 
+ 86.6 us/s; 0.25;;;;kWork;delayed_fput
+ 28.5 us/s; 0.25;;;;Process;[PID 376] [jbd2/sda3-8]
+ 18.4 us/s; 0.25;;;;Process;[PID 11063] nemo 
+ 16.3 us/s; 0.25;;;;Process;[PID 11212] xed
+ 15.9 us/s; 0.25;;;;Process;[PID 3137] /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-sound 
+ 12.5 us/s; 0.25;;;;Process;[PID 1769] /usr/lib/accountsservice/accounts-daemon 
+ 11.0 us/s; 0.25;;;;Process;[PID 2296] /usr/sbin/NetworkManager --no-daemon 
+  6.0 us/s; 0.25;;;;Process;[PID 3134] /usr/lib/rtkit/rtkit-daemon 
+  3.5 us/s; 0.25;;;;Process;[PID 11] [watchdog/0]
+  1.6 us/s; 0.25;;;;Process;[PID 14] [watchdog/1]
+  1.5 us/s; 0.25;;;;Process;[PID 20] [watchdog/2]
+  1.4 us/s; 0.25;;;;Process;[PID 26] [watchdog/3]
+  0.4 us/s; 0.25;;;;kWork;blk_timeout_work
+ 35.2 us/s; 0.20;;;;Process;[PID 2126] /usr/sbin/thermald --no-daemon --dbus-enable 
+152.2 us/s; 0.15;;;;Interrupt;[0] HI_SOFTIRQ
+ 19.4 us/s; 0.20;;;;Process;[PID 3448] /usr/lib/gvfs/gvfsd-trash --spawner :1.10 /org/gtk/gvfs/exec_spaw/0 
+  3.8 us/s; 0.20;;;;Process;[PID 2436] /usr/bin/containerd 
+504.6 us/s;;;;;Interrupt;[17] mmc0
+ 31.1 us/s; 0.15;;;;Process;[PID 1743] avahi-daemon: running [digital-alchemist-2.local] 
+ 19.5 us/s; 0.15;;;;Process;[PID 32325] /usr/lib/gvfs/gvfsd-recent --spawner :1.10 /org/gtk/gvfs/exec_spaw/10 
+ 14.3 us/s; 0.15;;;;Process;[PID 11212] pool
+ 11.3 us/s; 0.15;;;;Process;[PID 11202] SSL Cert #550
+  8.5 us/s; 0.15;;;;Process;[PID 3457] /usr/lib/gvfs/gvfsd-metadata 
+  5.9 us/s; 0.15;;;;Process;[PID 215] [i915/signal:2]
+  1.4 us/s; 0.15;;;;kWork;free_work
+  1.3 us/s; 0.15;;;;kWork;process_srcu
+  1.1 us/s; 0.15;;;;Process;[PID 11207] powertop -C ./power_report 
+108.3 us/s; 0.10;;;;Process;[PID 2478] /usr/bin/containerd 
+ 44.9 us/s; 0.10;;;;Process;[PID 1666] /usr/sbin/irqbalance --foreground 
+290.9 us/s;;;;;Process;[PID 9706] [kworker/u8:90]
+;;;;;;
+;;;;;;
+
+
+The battery reports a discharge rate of:  13.3  W;
+
+The power consumed was :  305  J;
+____________________________________________________________________
+ *  *  *   Device Power Report   *  *  *
+
+Usage;Device Name
+  7.8%;CPU misc
+  7.8%;CPU core
+100.0%;Audio codec hwC0D0: Cirrus Logic
+100.0%;Audio codec hwC0D3: Intel
+100.0%;Radio device: wl
+100.0%;USB device: IR Receiver (Apple Computer, Inc.)
+100.0%;Radio device: wl
+ 73.3%;Display backlight
+ 73.0%;Display backlight
+  0.5 pkts/s;Network interface: wlp2s0 (wl)
+  0.0%;USB device: FaceTime HD Camera (Built-in) (Apple Inc.)
+  0.0%;USB device: EHCI Host Controller
+  0.0%;USB device: usb-device-8087-0024
+  0.0%;USB device: Bluetooth USB Host Controller (Apple Inc.)
+  0.0%;USB device: BRCM20702 Hub (Apple Inc.)
+  0.0%;USB device: xHCI Host Controller
+  0.0%;Radio device: btusb
+  0.0%;USB device: xHCI Host Controller
+100.0%;PCI Device: Intel Corporation 7 Series/C216 Chipset Family PCI Express Root Port 1
+100.0%;PCI Device: Intel Corporation 7 Series/C216 Chipset Family MEI Controller #1
+100.0%;PCI Device: Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+100.0%;PCI Device: Intel Corporation Xeon E3-1200 v2/3rd Gen Core processor PCI Express Root Port
+100.0%;PCI Device: Broadcom Inc. and subsidiaries BCM4331 802.11a/b/g/n
+100.0%;PCI Device: Intel Corporation HM77 Express Chipset LPC Controller
+100.0%;PCI Device: Intel Corporation 7 Series Chipset Family 6-port SATA Controller [AHCI mode]
+100.0%;PCI Device: LSI Corporation FW643 [TrueFire] PCIe 1394b Controller
+100.0%;PCI Device: Intel Corporation 7 Series/C216 Chipset Family High Definition Audio Controller
+100.0%;USB device: Apple Internal Keyboard / Trackpad (Apple Inc.)
+100.0%;USB device: usb-device-0424-2513
+100.0%;USB device: EHCI Host Controller
+100.0%;USB device: usb-device-8087-0024
+100.0%;PCI Device: Broadcom Inc. and subsidiaries NetXtreme BCM57765 Gigabit Ethernet PCIe
+100.0%;PCI Device: Intel Corporation 7 Series/C210 Series Chipset Family USB xHCI Host Controller
+100.0%;PCI Device: Intel Corporation 7 Series/C210 Series Chipset Family PCI Express Root Port 3
+100.0%;PCI Device: Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+100.0%;PCI Device: Intel Corporation 7 Series/C210 Series Chipset Family PCI Express Root Port 2
+100.0%;PCI Device: Intel Corporation 3rd Gen Core processor DRAM Controller
+100.0%;PCI Device: Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+100.0%;PCI Device: Intel Corporation 7 Series/C216 Chipset Family USB Enhanced Host Controller #2
+100.0%;PCI Device: Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+100.0%;PCI Device: Intel Corporation 7 Series/C216 Chipset Family SMBus Controller
+100.0%;PCI Device: Intel Corporation 7 Series/C216 Chipset Family USB Enhanced Host Controller #1
+100.0%;PCI Device: Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+100.0%;PCI Device: Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+100.0%;PCI Device: Broadcom Inc. and subsidiaries BCM57765/57785 SDXC/MMC Card Reader
+100.0%;PCI Device: Intel Corporation 3rd Gen Core processor Graphics Controller
+100.0%;PCI Device: Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+  0.0 pkts/s;Network interface: enp1s0f0 (tg3)
+  0.0%;runtime-coretemp.0
+  0.0%;runtime-iTCO_wdt.0.auto
+  0.0%;runtime-reg-dummy
+  0.0%;runtime-PNP0C0D:00
+  0.0%;runtime-PNP0C09:00
+  0.0%;runtime-APP0001:00
+  0.0%;runtime-ACPI0003:00
+  0.0%;runtime-applesmc.768
+  0.0%;runtime-alarmtimer
+  0.0%;runtime-Fixed MDIO bus.0
+  0.0%;runtime-PNP0C0C:00
+  0.0%;runtime-APP0003:00
+  0.0%;runtime-ACPI0008:00
+  0.0%;runtime-INT0800:00
+  0.0%;runtime-ACPI0002:00
+  0.0%;runtime-efi-framebuffer.0
+  0.0%;runtime-vboxdrv.0
+  0.0%;runtime-regulatory.0
+  0.0%;I2C Adapter (i2c-5): i915 gmbus dpd
+  0.0%;runtime-PNP0C0E:00
+  0.0%;runtime-APP0002:00
+  0.0%;runtime-PNP0C04:00
+  0.0%;runtime-ACPI0001:00
+  0.0%;runtime-serial8250
+  0.0%;runtime-pcspkr
+  0.0%;runtime-microcode
+  0.0%;I2C Adapter (i2c-3): i915 gmbus dpc
+  0.0%;I2C Adapter (i2c-1): i915 gmbus vga
+  0.0%;I2C Adapter (i2c-8): DPDDC-D
+  0.0%;I2C Adapter (i2c-6): DPDDC-B
+  0.0%;I2C Adapter (i2c-4): i915 gmbus dpb
+  0.0%;I2C Adapter (i2c-2): i915 gmbus panel
+  0.0%;I2C Adapter (i2c-0): i915 gmbus ssc
+  0.0%;I2C Adapter (i2c-7): DPDDC-C
+____________________________________________________________________
+ *  *  *   Process Device Activity   *  *  *
+
+Process;Device
+systemd;/dev/autofs
+;/dev/kmsg
+bluetoothd;/dev/rfkill
+acpid;/dev/input/event0
+;/dev/input/event1
+;/dev/input/event10
+;/dev/input/event11
+;/dev/input/event12
+;/dev/input/event13
+;/dev/input/event2
+;/dev/input/event3
+;/dev/input/event4
+;/dev/input/event5
+;/dev/input/event7
+systemd-logind;/dev/input/event0
+;/dev/input/event1
+;/dev/input/event2
+;/dev/input/event3
+;/dev/input/event7
+wpa_supplicant;/dev/random
+;/dev/rfkill
+Xorg;/dev/dri/card0
+;/dev/dri/card0
+;/dev/input/event1
+;/dev/input/event14
+;/dev/input/event15
+;/dev/input/event2
+;/dev/input/event3
+;/dev/input/event4
+;/dev/input/event5
+;/dev/input/event7
+;/dev/vga_arbiter
+cinnamon-sessio;/dev/dri/card0
+gvfsd-fuse;/dev/fuse
+pulseaudio;/dev/snd/controlC0
+;/dev/snd/controlC0
+;/dev/snd/controlC0
+upowerd;/dev/input/event0
+cinnamon;/dev/dri/card0
+Web Content;/dev/dri/card0
+;/dev/dri/card0
+;/dev/dri/card0
+atom;/dev/dri/card0
+systemd-journal;/dev/kmsg
+;/dev/kmsg
+
+____________________________________________________________________
+ *  *  *   AHCI ALPM Residency Statistics - Not supported on this macine   *  *  *
+
+____________________________________________________________________
+ *  *  *   Software Settings in Need of Tuning   *  *  *
+
+Description;Script
+Enable SATA link power management for host5;echo 'min_power' > '/sys/class/scsi_host/host5/link_power_management_policy';
+Enable SATA link power management for host3;echo 'min_power' > '/sys/class/scsi_host/host3/link_power_management_policy';
+Enable SATA link power management for host1;echo 'min_power' > '/sys/class/scsi_host/host1/link_power_management_policy';
+Enable SATA link power management for host2;echo 'min_power' > '/sys/class/scsi_host/host2/link_power_management_policy';
+Enable SATA link power management for host0;echo 'min_power' > '/sys/class/scsi_host/host0/link_power_management_policy';
+Enable Audio codec power management;echo '1' > '/sys/module/snd_hda_intel/parameters/power_save';
+Runtime PM for I2C Adapter i2c-3 (i915 gmbus dpc);echo 'auto' > '/sys/bus/i2c/devices/i2c-3/device/power/control';
+Runtime PM for I2C Adapter i2c-5 (i915 gmbus dpd);echo 'auto' > '/sys/bus/i2c/devices/i2c-5/device/power/control';
+Runtime PM for I2C Adapter i2c-2 (i915 gmbus panel);echo 'auto' > '/sys/bus/i2c/devices/i2c-2/device/power/control';
+Autosuspend for USB device IR Receiver [Apple Computer, Inc.];echo 'auto' > '/sys/bus/usb/devices/2-1.8.2/power/control';
+Runtime PM for I2C Adapter i2c-4 (i915 gmbus dpb);echo 'auto' > '/sys/bus/i2c/devices/i2c-4/device/power/control';
+Runtime PM for I2C Adapter i2c-0 (i915 gmbus ssc);echo 'auto' > '/sys/bus/i2c/devices/i2c-0/device/power/control';
+Autosuspend for USB device Apple Internal Keyboard / Trackpad [Apple Inc.];echo 'auto' > '/sys/bus/usb/devices/2-1.8.3/power/control';
+Runtime PM for I2C Adapter i2c-1 (i915 gmbus vga);echo 'auto' > '/sys/bus/i2c/devices/i2c-1/device/power/control';
+Runtime PM for PCI Device Intel Corporation 7 Series/C210 Series Chipset Family USB xHCI Host Controller;echo 'auto' > '/sys/bus/pci/devices/0000:00:14.0/power/control';
+Runtime PM for PCI Device Intel Corporation 3rd Gen Core processor Graphics Controller;echo 'auto' > '/sys/bus/pci/devices/0000:00:02.0/power/control';
+Runtime PM for PCI Device Broadcom Inc. and subsidiaries BCM57765/57785 SDXC/MMC Card Reader;echo 'auto' > '/sys/bus/pci/devices/0000:01:00.1/power/control';
+Runtime PM for PCI Device Intel Corporation 7 Series/C216 Chipset Family USB Enhanced Host Controller #1;echo 'auto' > '/sys/bus/pci/devices/0000:00:1d.0/power/control';
+Runtime PM for PCI Device Intel Corporation 7 Series/C216 Chipset Family USB Enhanced Host Controller #2;echo 'auto' > '/sys/bus/pci/devices/0000:00:1a.0/power/control';
+Runtime PM for PCI Device LSI Corporation FW643 [TrueFire] PCIe 1394b Controller;echo 'auto' > '/sys/bus/pci/devices/0000:03:00.0/power/control';
+Runtime PM for PCI Device Intel Corporation 7 Series Chipset Family 6-port SATA Controller [AHCI mode];echo 'auto' > '/sys/bus/pci/devices/0000:00:1f.2/power/control';
+Runtime PM for PCI Device Intel Corporation HM77 Express Chipset LPC Controller;echo 'auto' > '/sys/bus/pci/devices/0000:00:1f.0/power/control';
+Runtime PM for PCI Device Broadcom Inc. and subsidiaries BCM4331 802.11a/b/g/n;echo 'auto' > '/sys/bus/pci/devices/0000:02:00.0/power/control';
+Runtime PM for PCI Device Intel Corporation 3rd Gen Core processor DRAM Controller;echo 'auto' > '/sys/bus/pci/devices/0000:00:00.0/power/control';
+Runtime PM for PCI Device Intel Corporation 7 Series/C216 Chipset Family SMBus Controller;echo 'auto' > '/sys/bus/pci/devices/0000:00:1f.3/power/control';
+Runtime PM for PCI Device Intel Corporation 7 Series/C216 Chipset Family High Definition Audio Controller;echo 'auto' > '/sys/bus/pci/devices/0000:00:1b.0/power/control';
+Runtime PM for PCI Device Broadcom Inc. and subsidiaries NetXtreme BCM57765 Gigabit Ethernet PCIe;echo 'auto' > '/sys/bus/pci/devices/0000:01:00.0/power/control';
+Runtime PM for PCI Device Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010];echo 'auto' > '/sys/bus/pci/devices/0000:06:00.0/power/control';
+____________________________________________________________________
+ *  *  *   Untunable Software Issues   *  *  *
+
+Description
+I2C Adapter i2c-8 has no runtime power management
+I2C Adapter i2c-6 has no runtime power management
+I2C Adapter i2c-7 has no runtime power management
+____________________________________________________________________
+ *  *  *   Optimal Tuned Software Settings   *  *  *
+
+Description
+Bluetooth device interface status
+NMI watchdog should be turned off
+VM writeback timeout
+Enable SATA link power management for host4
+Autosuspend for USB device Bluetooth USB Host Controller [Apple Inc.]
+Autosuspend for USB device BRCM20702 Hub [Apple Inc.]
+Autosuspend for unknown USB device 2-1.8 (0424:2513)
+Autosuspend for USB device EHCI Host Controller [usb2]
+Autosuspend for unknown USB device 1-1 (8087:0024)
+Autosuspend for USB device EHCI Host Controller [usb1]
+Autosuspend for unknown USB device 2-1 (8087:0024)
+Autosuspend for USB device xHCI Host Controller [usb3]
+Autosuspend for USB device xHCI Host Controller [usb4]
+Autosuspend for USB device FaceTime HD Camera (Built-in) [Apple Inc.]
+Runtime PM for PCI Device Intel Corporation 7 Series/C210 Series Chipset Family PCI Express Root Port 3
+Runtime PM for PCI Device Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+Runtime PM for PCI Device Intel Corporation Xeon E3-1200 v2/3rd Gen Core processor PCI Express Root Port
+Runtime PM for PCI Device Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+Runtime PM for PCI Device Intel Corporation 7 Series/C210 Series Chipset Family PCI Express Root Port 2
+Runtime PM for PCI Device Intel Corporation 7 Series/C216 Chipset Family PCI Express Root Port 1
+Runtime PM for PCI Device Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+Runtime PM for PCI Device Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+Runtime PM for PCI Device Intel Corporation 7 Series/C216 Chipset Family MEI Controller #1
+Runtime PM for PCI Device Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+Runtime PM for PCI Device Intel Corporation CV82524 Thunderbolt Controller [Light Ridge 4C 2010]
+Wake-on-lan status for device enp1s0f0
+Wake-on-lan status for device wlp2s0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
