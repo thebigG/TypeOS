@@ -45,7 +45,7 @@ int wirte_count = 0;
 // extern struct page* global_page;
 // extern enum scriptfs_state current_scriptfs_state;
 // EXPORT_SYMBOL(global_page);
-// EXPORT_SYMBOL(current_scriptfs_state);  
+// EXPORT_SYMBOL(current_scriptfs_state);
 struct ramfs_mount_opts {
 	umode_t mode;
 };
@@ -105,6 +105,7 @@ struct inode *ramfs_get_inode(struct super_block *sb,
 
 /*
  * File creation. Allocate an inode, and we're done..
+ *scriptfs uses this to create its own files as well.
  */
 /* SMP-safe */
 static int
@@ -112,7 +113,7 @@ ramfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, dev_t dev)
 {
 
 	struct inode * inode = ramfs_get_inode(dir->i_sb, dir, mode, dev);
-	printk("ramfs_mknod pid:%lu for  inode:%lu\n", current->pid, inode->i_ino);
+	printk("ramfs_mknod pid:%lu for  inode:%lu\n", current->pid, inode->i_ino); //
 	if(is_current_scriptfs_mounted())
 	{
 		printk("creating a  file for scriptfs with this inode:%lu\n", inode->i_ino);
@@ -275,7 +276,6 @@ int ramfs_fill_super(struct super_block *sb, void *data, int silent)
 	if(current_scriptfs_state == scriptfs_state_NOOP)
 	{
 		printk(">>scriptfs_state_NOOP(new)<<\n");
-		// is_scriptfs_pid();
 	}
 	else if(current_scriptfs_state == scriptfs_state_READ)
 	{
@@ -319,7 +319,7 @@ int ramfs_fill_super(struct super_block *sb, void *data, int silent)
 		// 	printk("ref count for the global page:%d\n",page_count(global_page));
 		// }
 	}
-	if(is_scriptfs_pid())
+	if(is_current_scriptfs_mounted())
 	{
 		printk("scriptfs was here\n");
 	}
@@ -376,7 +376,8 @@ static void ramfs_kill_sb(struct super_block *sb)
 	// if(scriptfs_poems !=NULL)
 	// scriptfs_free_pages(scriptfs_poems, POEM_SIZE);
 	// kfree();
-	printk("killing ramfs???\n");
+	printk("killing ramfs\n");
+	
 // }
 	kfree(sb->s_fs_info);
 	kill_litter_super(sb);

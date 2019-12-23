@@ -26,6 +26,9 @@ This checks if the current process is trying to write to scriptfs AND
 if scriptfs is mounted.
 Most of the time we'll be using this function to check if scriptfs has been
 mounted along with ramfs.
+
+WARNING: Be very careful using this function, or any functin like is_scriptfs_pid. It can
+break the kernel if one tries to access the current task while the kernel boots.
 */
 int is_current_scriptfs_mounted()
 {
@@ -76,6 +79,9 @@ struct page** init_pages(enum scriptfs_context new_context)
   int i = 0;
   // new_pages->head  = new_pages;
   // struct linked_list_pages* head = new_pages->head;
+    struct timespec time_info;
+    long noop_time_avg = 0;
+    long alloc_pages_time_avg  = 0;
   while(i<number_of_pages)
   {
 
@@ -86,21 +92,37 @@ struct page** init_pages(enum scriptfs_context new_context)
     //   return -1;
     // }
     // head->page =  __page_cache_alloc(flags);
-    new_pages[i] =  __page_cache_alloc(flags);
-    if(&(new_pages[i]) == NULL)
-    {
-      printk("pre-allocation failed!");
-      return -1;
-    }
-    else
-    {
-      printk("pre-allocation successful!\n");
-    }
+    getnstimeofday(&time_info);
+long start  = time_info.tv_nsec;
+new_pages[i] =  __page_cache_alloc(flags);
+getnstimeofday(&time_info);
+long end  = time_info.tv_nsec;
+if(&(new_pages[i]) == NULL)
+{
+  printk("pre-allocation failed!");
+  return -1;
+}
+else
+{
+  printk("pre-allocation successful!\n");
+  alloc_pages_time_avg +=  (end - start);
+  printk("allocation time(in nanoseconds):%ld\n", end - start);
+  getnstimeofday(&time_info);
+  //NOOP comment
+  start  = time_info.tv_nsec;
+  getnstimeofday(&time_info);
+  end  = time_info.tv_nsec;
+  printk("NOOP time(in nanoseconds):%ld\n", end - start);
+  noop_time_avg += (end - start);
+}
+new_pages[i]->scriptfs_flag = SCRIPTFS_PAGE_FLAG_KEY;
     // new_pages[i]->scriptfs_flag = SCRIPTFS_PAGE_FLAG_KEY;
     __SetPageReferenced(new_pages[i]);
     // __SetPageReferenced(scriptfs_poems[i].poem_page); //maybe doing this is not such a good idea(?)
     i++;
   }
+  printk("time avg for alloc_pages:%ld", alloc_pages_time_avg/number_of_pages );
+  printk("time avg for noop:%ld", noop_time_avg/number_of_pages );
   return new_pages;
 }
 struct scriptfs_block* init_scriptfs_block(enum scriptfs_context new_context, unsigned long new_inode)
@@ -182,6 +204,7 @@ int append_new_block_to_global_pool(struct scriptfs_block* new_block)
   head->next  = kmalloc(sizeof(struct scriptfs_block_pool), GFP_KERNEL);
   printk("append_new_block_to_global_pool#9\n");
   head = head->next;
+  head->scriptfs_block_inode = new_block->inode;
   printk("append_new_block_to_global_pool#10\n");
   head->block_node = new_block;
   printk("append_new_block_to_global_pool#11\n");
@@ -266,21 +289,30 @@ struct page* fetch_next_page(unsigned long inode)
 {
   struct scriptfs_block_pool* head  = global_scriptfs_block_pool->head;
   struct page* new_page;
+  // printk("fetch_next_page#1\n");
   while(head!=NULL)
   {
+    // printk("fetch_next_page#2\n");
     if(head->scriptfs_block_inode == inode)
     {
+      // printk("fetch_next_page#3\n");
       new_page = head->block_node->pages[head->block_node->current_index];
+      // printk("fetch_next_page#4\n");
       head->block_node->current_index++;
+      // printk("fetch_next_page#5\n");
       if(head->block_node->current_index>=get_context_page_size(head->block_node->context))
       {
+        // printk("fetch_next_page#6\n");
         printk(PANIC_SCRIPTFS);
         return NULL;
       }
+      // printk("fetch_next_page#7\n");
       return new_page;
     }
+    // printk("fetch_next_page#8\n");
     head = head->next;
   }
+  // printk("fetch_next_page#9\n");
   return NULL;
 }
 int get_context_page_size(enum scriptfs_context new_context)

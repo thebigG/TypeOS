@@ -10,13 +10,17 @@ syscall_num_scriptfs_context  = 335
 libc = ctypes.CDLL(None)
 syscall = libc.syscall
 syscall(syscall_num_scriptfs_pid, os.getpid())
-context_dir = {"poem": scriptfs_util_userspace.scriptfs_context.scriptfs_context_POEM,
-                "short_novel": scriptfs_util_userspace.scriptfs_context.scriptfs_context_SHORT_NOVEL,
-                "small_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_SMALL_NOVEL,
-                "medium_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_MEDIUM_NOVEL,
-                "large_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_LARGE_NOVEL,
-                 "super_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_SUPER_NOVEL,
-               "no_context":scriptfs_util_userspace.scriptfs_context.scriptfs_context_NO_CONTEXT }
+context_dir = {"poem": scriptfs_util_userspace.scriptfs_context.scriptfs_context_POEM.value,
+                "short_novel": scriptfs_util_userspace.scriptfs_context.scriptfs_context_SHORT_NOVEL.value,
+                "small_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_SMALL_NOVEL.value,
+                "medium_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_MEDIUM_NOVEL.value,
+                "large_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_LARGE_NOVEL.value,
+                 "super_novel":scriptfs_util_userspace.scriptfs_context.scriptfs_context_SUPER_NOVEL.value,
+               "no_context":scriptfs_util_userspace.scriptfs_context.scriptfs_context_NO_CONTEXT.value }
+
+
+state_dir = {"mount":scriptfs_util_userspace.scriptfs_state.scriptfs_state_MOUNT.value,
+             "noop":scriptfs_util_userspace.scriptfs_state.scriptfs_state_NOOP.value,"read":scriptfs_util_userspace.scriptfs_state.scriptfs_state_READ.value,"write":scriptfs_util_userspace.scriptfs_state.scriptfs_state_WRITE.value}
 
 #I know there are better ways to generate words(like reading from a giant file of words, which linux has).
 #But I don't want to interact with the filesystem unless it is for our intent and purposes, because that will bring inaccuracies we don't want.
@@ -115,6 +119,11 @@ def sequential_writethrough( filepath, size ):
     script_file.close()
 
 
+def generate_filename_list(original_name, number_of_names):
+    new_names = []
+    for number in range(number_of_names):
+        new_names.append(original_name+"#"+str(number))
+    return new_names
 
 #def rand
 
@@ -122,11 +131,13 @@ if (len(sys.argv) < 7):
     print("USAGE: python3 ./make_script.py -c context_clue  size ./file_path\ mode cache_strategy\n For example:  python3 ./make_script.py -c 'poem' 20kb 'How Alice met Bob' seq wr_through  ")
     exit()
 
-cache_strategy = sys.argv[6]
-mode = sys.argv[5]
-file_name = sys.argv[4]
-size = sys.argv[3]
-context = sys.argv[2]
+cache_strategy = sys.argv[10]
+mode = sys.argv[9]
+file_name = sys.argv[8]
+size = sys.argv[7]
+context = sys.argv[6]
+scriptfs_state = sys.argv[4]
+number_of_files = sys.argv[2]
 print("working#1")
 if(context in context_dir):
     return_val  = 0
@@ -138,7 +149,7 @@ if(context in context_dir):
 else:
     print("Invalid context!\n Valid contexts:'poem', 'short_novel', 'medium_novel', 'large_novel', 'super_novel', 'no_context'\n") 
     exit()
-if (syscall(syscall_num_scriptfs_state, scriptfs_util_userspace.scriptfs_state.scriptfs_state_MOUNT.value) == -1):
+if (syscall(syscall_num_scriptfs_state, state_dir[scriptfs_state]) == -1):
     print("It looks like the syscall to change state failed!")
     exit()
 if(syscall(syscall_num_scriptfs_context, context_dir[context]) == -1):
@@ -148,8 +159,13 @@ if(syscall(syscall_num_scriptfs_context, context_dir[context]) == -1):
 #exit()
 #if len(sys.argv)>5:
     #times_to_write = sys.argv[5]
+files_list =  generate_filename_list(file_name, number_of_files)
 if mode == "seq" and cache_strategy=="wr_through":
-    sequential_writethrough(file_name, size)
+    for file in files_list:
+        sequential_writethrough(file, size)
 
 elif mode == "rand" and cache_strategy=="wr_through":
     random_writethrough(file_name, size,int(times_to_write) )
+
+if (syscall(syscall_num_scriptfs_state, state_dir["noop"]) == -1):
+    print("It looks like the syscall to change state failed!")

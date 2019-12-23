@@ -38,7 +38,7 @@
 #include "internal.h"
 
 /*
- * Attempt to steal a page from a pipe buffer. This should perhaps go into
+ * Attempt to steal a page from a pipe buffer. This should perhaps go into 
  * a vm helper function, it's already simplified quite a bit by the
  * addition of remove_mapping(). If success is returned, the caller may
  * attempt to reuse this page for another destination.

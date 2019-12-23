@@ -153,7 +153,7 @@ EXPORT_SYMBOL(generic_file_llseek);
 
 /**
  * fixed_size_llseek - llseek implementation for fixed-sized devices
- * @file:	file structure to seek on
+ * @file:	file structure to seek on 
  * @offset:	file offset to seek to
  * @whence:	type of seek
  * @size:	size of the file
@@ -648,7 +648,7 @@ ssize_t ksys_pwrite64(unsigned int fd, const char __user *buf,
 	f = fdget(fd);
 	if (f.file) {
 		ret = -ESPIPE;
-		if (f.file->f_mode & FMODE_PWRITE)  
+		if (f.file->f_mode & FMODE_PWRITE)
 			ret = vfs_write(f.file, buf, count, &pos);
 		fdput(f);
 	}

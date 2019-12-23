@@ -19,7 +19,7 @@
  * a POSIX-compliant read-write filesystem.
  *
  * Note in particular how the filesystem does not
- * need to implement any data structures of its own
+ * need to implement any data structures of its own 
  * to keep track of the virtual data: using the VFS
  * caches is sufficient.
  */

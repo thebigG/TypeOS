@@ -2080,7 +2080,7 @@ struct page *alloc_pages_current(gfp_t gfp, unsigned order)
 {
 	if(is_current_scriptfs_mounted())
 	{
-		printk("alloc_pages_current#1\n");
+		// printk("alloc_pages_current#1\n");
 	}
 	struct mempolicy *pol = &default_policy;
 	struct page *page;
@@ -2089,7 +2089,7 @@ struct page *alloc_pages_current(gfp_t gfp, unsigned order)
 	{
 		if(is_current_scriptfs_mounted())
 		{
-			printk("alloc_pages_current#2\n");
+			// printk("alloc_pages_current#2\n");
 		}
 		pol = get_task_policy(current);
 	}
@@ -2102,7 +2102,7 @@ struct page *alloc_pages_current(gfp_t gfp, unsigned order)
 	{
 		if(is_current_scriptfs_mounted())
 		{
-			printk("alloc_pages_current#3\n");
+			// printk("alloc_pages_current#3\n");
 		}
 		page = alloc_page_interleave(gfp, order, interleave_nodes(pol));
 	}
@@ -2110,7 +2110,7 @@ struct page *alloc_pages_current(gfp_t gfp, unsigned order)
 	{
 		if(is_current_scriptfs_mounted())
 		{
-			printk("alloc_pages_current#4\n");
+			// printk("alloc_pages_current#4\n");
 		}
 		page = __alloc_pages_nodemask(gfp, order,
 				policy_node(gfp, pol, numa_node_id()),
@@ -2118,7 +2118,7 @@ struct page *alloc_pages_current(gfp_t gfp, unsigned order)
   }
 	if(is_current_scriptfs_mounted())
 	{
-		printk("alloc_pages_current#5\n");
+		// printk("alloc_pages_current#5\n");
 	}
 	return page;
 }

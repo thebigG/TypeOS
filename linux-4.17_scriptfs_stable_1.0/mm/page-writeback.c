@@ -2829,19 +2829,19 @@ void wait_for_stable_page(struct page *page)
 {
 	if(is_current_scriptfs_mounted())
 	{
-		printk("wait_for_stable_page#1\n");
+		// printk("wait_for_stable_page#1\n");
 	}
 	if (bdi_cap_stable_pages_required(inode_to_bdi(page->mapping->host)))
 	{
 		if(is_current_scriptfs_mounted())
 		{
-			printk("wait_for_stable_page#2\n");
+			// printk("wait_for_stable_page#2\n");
 		}
 		wait_on_page_writeback(page);
 	}
 	if(is_current_scriptfs_mounted())
 	{
-		printk("wait_for_stable_page#3\n");
+		// printk("wait_for_stable_page#3\n");
 	}
 }
 EXPORT_SYMBOL_GPL(wait_for_stable_page);

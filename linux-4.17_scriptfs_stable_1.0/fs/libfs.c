@@ -18,7 +18,7 @@
 #include <linux/buffer_head.h> /* sync_mapping_buffers */
 #include <linux/scriptfs_util.h>
 #include <linux/uaccess.h>
-
+#include <linux/time.h>
 #include "internal.h"
 
 int simple_getattr(const struct path *path, struct kstat *stat,
@@ -341,7 +341,7 @@ We then use this inode to find and delete the pages allocated by scriptfs!
 int simple_unlink(struct inode *dir, struct dentry *dentry)
 {
 	struct inode *inode = d_inode(dentry);
-	if(is_scriptfs_mounted())
+	if(is_current_scriptfs_mounted())
 	{
 		printk("deleting this inode:%lu\n", inode->i_ino);
 		printk("deleting this dir inode:%lu\n", dir->i_ino);
@@ -436,7 +436,7 @@ int simple_setattr(struct dentry *dentry, struct iattr *iattr)
 	return 0;
 }
 EXPORT_SYMBOL(simple_setattr);
-
+//
 int simple_readpage(struct file *file, struct page *page)
 {
 	clear_highpage(page);
@@ -459,12 +459,49 @@ int simple_write_begin(struct file *file, struct address_space *mapping,
 	{
 		printk("Does this print#1-->simple_write_begin\n");
 	}
+	if(is_scriptfs_pid() && current_scriptfs_state == scriptfs_state_NOOP)
+	{
+		struct timespec time_info;
+		long start;
+		long end;
+		long page_write_begin_time_avg = 0;
+		getnstimeofday(&time_info);
+		start = time_info.tv_nsec;
 	page = grab_cache_page_write_begin(mapping, index, flags);
+	getnstimeofday(&time_info);
+	end  = time_info.tv_nsec;
+	printk("ramfs grab_cache_page_write_begin time(in nanoseconds):%ld for inode:%lu\n", end - start,page->mapping->host->i_ino);
+	}
+	else if(is_current_scriptfs_mounted())
+	{
+		struct timespec time_info;
+		long start;
+		long end;
+		long page_write_begin_time_avg = 0;
+		getnstimeofday(&time_info);
+		start = time_info.tv_nsec;
+	page = grab_cache_page_write_begin(mapping, index, flags);
+	getnstimeofday(&time_info);
+	end  = time_info.tv_nsec;
+	printk("scriptfs grab_cache_page_write_begin time(in nanoseconds):%ld for inode:%lu\n", end - start,page->mapping->host->i_ino);
+	}
 	if (!page)
 		return -ENOMEM;
 
 	*pagep = page;
-
+	if(is_current_scriptfs_mounted())
+	{
+		printk("checking correctness of page for scriptfs\n"); //
+		if((*pagep)->scriptfs_flag == SCRIPTFS_PAGE_FLAG_KEY)
+		{
+			printk("this page belongs to scrptfs!\n");
+		}
+		else
+		{
+			printk(PANIC_SCRIPTFS);
+			printk("This page does NOT belong to scriptfs, though it should!\n");
+		}
+	}
 	if (!PageUptodate(page) && (len != PAGE_SIZE)) {
 		unsigned from = pos & (PAGE_SIZE - 1);
 

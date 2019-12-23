@@ -548,13 +548,13 @@ static inline void wait_on_page_writeback(struct page *page)
 	{
 		if(is_current_scriptfs_mounted())
 		{
-			printk("wait_on_page_writeback#1 \n");
+			// printk("wait_on_page_writeback#1 \n");
 		}
 		wait_on_page_bit(page, PG_writeback);
 	}
 	if(is_current_scriptfs_mounted())
 	{
-		printk("wait_on_page_writeback#2\n");
+		// printk("wait_on_page_writeback#2\n");
 	}
 }
 
