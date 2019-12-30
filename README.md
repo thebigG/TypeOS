@@ -93,7 +93,7 @@ Now we can start making scriptfs files!
 
 **5.** First let's write a poem like this:
 
-	 python3 ~/playground/make_script.py -t 0  -s "mount" -c "poem"  1KB file1_scriptfs  seq wr_through
+	 python3 scriptfs//playground/make_script.py -t 0  -s "mount" -c "poem"  1KB file1_scriptfs  seq wr_through
 	 
 This will write a poem for you with random words in it in the current directory, which is "/mnt/scriptfs"
 
