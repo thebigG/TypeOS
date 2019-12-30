@@ -150,7 +150,7 @@ This will of couse be different on yuur machine, but that's ok. Jost down your c
 
 
 
-This will take a while, so please wait. It shouldn't take more than 5 minutes. Go aget some coffee and now you should now have a 4MB file on your scriptfs filesystem!
+This will take a while, so please wait. It shouldn't take more than 5 minutes. Go get some coffee and now you should  have a 4MB file on your scriptfs filesystem!
  
  Actually that's a lie, because when you look at your memory usage with **free -m**  it will look like you're using WAY more memory than that(that's because you are)!
  
@@ -164,9 +164,9 @@ This will take a while, so please wait. It shouldn't take more than 5 minutes. G
 
 
 
-Remember the 74MB we had now we have about 256MB more than we previously had. We now  have 74MB + 256MB = 330MB. That's because our python scriptfs is using our syscall interface to inform scriptfs of the context which is the super_novel, which equals 256MB.
+Remember the 74MB we had? Now we have about 256MB more than we previously had. We now  have 74MB + 256MB = 330MB. That's because our python script is using our syscall interface to inform scriptfs of the context which is the super_novel, which equals 256MB.
 We know it's not EXACT, but given that scriptfs runs on top of ramfs, there are limitations such as memory size control of kernel memory.
-We use a lot of ramfs mechanisms and having "less memory" is a size effect of that. The kernel keeps tight bookeping of these pages and, even ramfs, is rather complex when one wants to "pin down" pages.
+We use a lot of ramfs mechanisms and having "less memory" is a byproduct of that. The kernel keeps tight bookeping of these pages and, even ramfs, is rather complex when one wants to "pin down" pages.
 
 
 **9.** Delete your super_novel as such:
@@ -176,7 +176,7 @@ We use a lot of ramfs mechanisms and having "less memory" is a size effect of th
 We have **320MB** of used memory now. You should have 4MB less on your machin too after running **free -m**. This is a bug that we were working hard to fix, but we didn't have time.  We suspect this might have to do with the issue of ACTUALLY pinning a page in the linux kernel. Which we found a lot of dispute about online, but not much that was conclusive. Ideally in the future scriptfs will delete ALL of the **256MB** that were allocated.
 
 
-**NOTE:** If you would like to time the performance of scriptfs and compare it to ramfs  **skip step 10.** If you are intersted in that, jump to the **How did we get the time statistics** section.
+**NOTE:** If you would like to time the performance of scriptfs and compare it to ramfs  **skip step 10.** If you are intersted in that, jump to the **How do we get time/performance statistics?** section.
 
 
 **10.** Unmount scriptfs like such:
@@ -192,7 +192,7 @@ We have **320MB** of used memory now. You should have 4MB less on your machin to
 Assuming that you DID NOT unmount scriptfs in step 10, follow the following steps to time the performance of scriptfs.
 
 
-**1.** For the first row on scriptfs, do the following:
+**1.** For **scriptfs**, do the following:
 
 	python3 ~/playground/playground/run_many_times.py 50  "/root/scriptfs/playground/make_script.py -t 0 -s "mount" -c "poem"  1b /mnt/scriptfs/file1_scriptfs  seq wr_through"
 
@@ -200,7 +200,7 @@ This script will write 1 byte to the file1_scriptfs 50 times. Give it some time,
 
 	time average(in seconds): 0.8378624725341797
 
-**2** For ramfs, do the following:
+**2.** For **ramfs**, do the following:
 
 	   python3 ~/playground/run_many_times.py 50  "/root/scriptfs/playground/make_script.py -t 0 -s "noop" -c "poem"  1b /mnt/scriptfs/file1_ramfs  seq wr_throug"
 
@@ -212,23 +212,13 @@ This should output something like this:
 
 
 
-To get the average time it takes to write for other types of contexts in **scriptfs**, replace the "poem" argument in 
+**3.** To get the average time it takes to write for other types of contexts in **scriptfs**, replace the "poem" argument in 
 
 		python3 ~/scriptfs/playground/run_many_times.py 50  "/root/scriptfs/playground/make_script.py -t 0 -s "mount" -c "poem"  1b /mnt/scriptfs/file1_scriptfs  seq wr_through"
 		
 with "short_novel", "small_novel", "medium_novel", "large_novel" or "super_novel".
 
 **Be sure to also replace the file name argument with something of your liking. This MUST be a full path when running the  " ~/scriptfs/playground/run_many_times.py" script.**
-
-
-
-To get the average time it takes to write for other types of contexts in **ramfs**, replace the "poem" argument in 
-
-		python3 ~/scriptfs/playground/run_may_times.py 50  "/root/scriptfs/playground/make_script.py -t 0 -s "noop" -c "poem"  1b /mnt/scriptfs/file1_scriptfs  seq wr_through"
-		
-with "short_novel", "small_novel", "medium_novel", "large_novel" or "super_novel".
-
-**Be sure to also replace the file name argument with something of your liking. This MUST be a full path when running the  "~/scriptfs/playground/run_many_times.py" script. Please NOTE the "noop" argument. This tells the kernel that this process from userspace wants to use ramfs, and NOT scriptfs**
 
 	
 
