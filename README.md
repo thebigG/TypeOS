@@ -32,7 +32,7 @@ A context-based file system(built on top of ramfs) that will hopefully make a wr
 
 
 
-#Instructions to run scriptfs
+##Instructions to run scriptfs
 
 Be sure to set up your kernel virtual machine by reading "QEMU - README" first!
 
