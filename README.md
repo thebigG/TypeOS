@@ -1,7 +1,8 @@
 # scriptfs
 A context-based file system(built on top of ramfs) that will hopefully make a writer's laptop last a 40-page short story without the annoying "you're laptop is about to die" warning.
 
-**NOTE:**scriptfs is a project that started as a research project for my operating systems class at Rutgers University, and I hope to finish it one day. As of right now, I am NOT working on it. Given that this project  could potentially take from a couple months to (possibly) years to complete, I will be working on some other project that should take me less than six months to complete, this is a little something called Tasker. After I'm done with Tasker, and if nothing else pops up, I wil come back to work on scriptfs.
+
+**NOTE:** scriptfs is a project that started as a research project for my operating systems class at Rutgers University, and I hope to finish it one day. As of right now, I am NOT working on it. Given that this project  could potentially take from a couple months to (possibly) years to complete, I will be working on some other project that should take me less than six months to complete, this is a little something called Tasker. After I'm done with Tasker, and if nothing else pops up, I wil come back to work on scriptfs.
 
 **Linux Changelog**
 
@@ -21,7 +22,9 @@ A context-based file system(built on top of ramfs) that will hopefully make a wr
 | Large Novel  | 2MB  | 512  |
 |Super Novel   | 256MB  | 64K  |
 
+
 #scriptfs stable changelog
+
 
 | Version  | description  |
 |---|---|
@@ -30,6 +33,7 @@ A context-based file system(built on top of ramfs) that will hopefully make a wr
 
 
 #Instructions to run scriptfs
+
 Be sure to set up your kernel virtual machine by reading "QEMU - README" first!
 
 **Make sure to copy the "TypeOS" folder to your new kernel before Booting your kernel**
