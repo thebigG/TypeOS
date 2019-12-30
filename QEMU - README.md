@@ -19,7 +19,7 @@ You are more than welcome to use your own custom kernel compilation methods and 
 
 ### Set environmental variables
 ```
-source scripts/setvars.sh "trusty"
+source qemu_scripts/setvars.sh "trusty"
 ```
 
 ### Instal required libraries
