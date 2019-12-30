@@ -159,7 +159,10 @@ if(syscall(syscall_num_scriptfs_context, context_dir[context]) == -1):
 #exit()
 #if len(sys.argv)>5:
     #times_to_write = sys.argv[5]
-files_list =  generate_filename_list(file_name, int(number_of_files))
+if(int(number_of_files)>0):    
+    files_list =  generate_filename_list(file_name, int(number_of_files))
+else:
+    files_list = [file_name]
 if mode == "seq" and cache_strategy=="wr_through":
     for file in files_list:
         sequential_writethrough(file, size)

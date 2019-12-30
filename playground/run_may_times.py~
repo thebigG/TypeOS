@@ -1,0 +1,16 @@
+import time
+import sys
+import subprocess
+
+times  = int(sys.argv[1])
+command  = sys.argv[2]
+command_list = ["python3"]
+for c in command.split():
+    command_list.append(c)
+
+for t in range(times):
+    subprocess.call(command_list)
+
+
+
+

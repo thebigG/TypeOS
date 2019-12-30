@@ -1,8 +1,0 @@
-****stat block size(when you call stat from terminal):512 bytes*****
-
-SPECIFIC TO RAMFS:
-super block for ramfs
-s_maxbytes= 9223372036854775807
-s_blocksize= 4096
-s_blocksize_bits= 12
-s_magic= 2240043254
