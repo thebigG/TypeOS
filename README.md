@@ -28,7 +28,7 @@ A context-based file system(built on top of ramfs) that will hopefully make a wr
 
 | Version  | description  |
 |---|---|
-| 0.1  | Fixed issue where the kernel was not booting. This was caused by placing the new scriptfs_flag in struct page at the beginning of the struct. After doing some research, I found out this will surely break the kernel becasue of padding-related issues. So I placed the new flag at the very bottom of the struct and it seems to be working. By no means this "file system" is near completion. There are plenty of problems to be solved; crash consistency, optimizations for inode lookup and plenty of other polishing to be done. You are more than welcome to have a go at it, but I'm not responsible for any damage you may cause to your machine, you will be modifying a kernel after all. Realistically speaking, you really should not have anything major to worry about if you run this kernel on top of qemu(read the "QEMU - README" for instructions), but please act with caution. I HIGHYLY recommend keeping a [timeshift](https://github.com/teejee2008/timeshift) timeshift backup of your configuration and (if you want to be paranoid-careful) maybe a backup of your data. |
+| 0.1  | Fixed issue where the kernel was not booting. This was caused by placing the new scriptfs_flag in struct page at the beginning of the struct. After doing some research, I found out this will surely break the kernel becasue of padding-related issues. So I placed the new flag at the very bottom of the struct and it seems to be working. By no means this "file system" is near completion. There are plenty of problems to be solved; crash consistency, optimizations for inode lookup and plenty of other polishing to be done. You are more than welcome to have a go at it, but I'm not responsible for any damage you may cause to your machine, you will be modifying a kernel after all. Realistically speaking, you really should not have anything major to worry about if you run this kernel on top of qemu(read the "QEMU - README" for instructions), but please act with caution. I HIGHYLY recommend keeping a [timeshift](https://github.com/teejee2008/timeshift) backup of your configuration and (if you want to be paranoid-careful) maybe a backup of your data. |
 
 
 
@@ -36,11 +36,11 @@ A context-based file system(built on top of ramfs) that will hopefully make a wr
 
 Be sure to set up your kernel virtual machine by reading "QEMU - README" first!
 
-**Make sure to copy the "TypeOS" folder to your new kernel before Booting your kernel**
+**Make sure to copy the "playground" folder to your new kernel before Booting your kernel**
 
-The TypeOS folder has all of the useful scripts for scriptfs. You can copy the TypeOS folder like this:
+The playground folder has all of the useful scripts for scriptfs. You can copy the playground(which is inside the scriptfs folder) folder like this:
 
-	TypeOS/qemu_scripts/copy_data_to_qemu.sh ~/OS_Theory/Research_Final_Report/TypeOS
+	scriptfs/qemu_scripts/copy_data_to_qemu.sh  scriptfs
 
 
 
@@ -59,7 +59,7 @@ scriptfs runs on top of ramfs, so ramfs should be mounted first.
 
 **3.** mount  ramfs as such:
 
-		TypeOS/playground/make_regular_fs.sh 
+		scriptfs/playground/make_regular_fs.sh 
 
 This will mount an instance of ramfs with 512mb on your system at location "/mnt/scriptfs/".
 
@@ -93,7 +93,7 @@ Now we can start making scriptfs files!
 
 **5.** First let's write a poem like this:
 
-	 python3 ~/TypeOS/playground/make_script.py -t 0  -s "mount" -c "poem"  1KB file1_scriptfs  seq wr_through
+	 python3 ~/playground/make_script.py -t 0  -s "mount" -c "poem"  1KB file1_scriptfs  seq wr_through
 	 
 This will write a poem for you with random words in it in the current directory, which is "/mnt/scriptfs"
 
@@ -146,7 +146,7 @@ This will of couse be different on yuur machine, but that's ok. Jost down your c
 
 **7.** Let's now create a super novel like this:
 
-	python3 ~/TypeOS/playground/make_script.py -t 0  -s "mount" -c "super_novel"  4MB file1_scriptfs_super_novel  seq wr_through
+	python3 ~/scriptfs/playground/make_script.py -t 0  -s "mount" -c "super_novel"  4MB file1_scriptfs_super_novel  seq wr_through
 
 
 
@@ -194,7 +194,7 @@ Assuming that you DID NOT unmount scriptfs in step 10, follow the following step
 
 **1.** For the first row on scriptfs, do the following:
 
-	python3 ~/TypeOS/playground/run_many_times.py 50  "/root/TypeOS/playground/make_script.py -t 0 -s "mount" -c "poem"  1b /mnt/scriptfs/file1_scriptfs  seq wr_through"
+	python3 ~/playground/playground/run_many_times.py 50  "/root/scriptfs/playground/make_script.py -t 0 -s "mount" -c "poem"  1b /mnt/scriptfs/file1_scriptfs  seq wr_through"
 
 This script will write 1 byte to the file1_scriptfs 50 times. Give it some time, and then it will output the average time it took to write that 1b to the file like this:
 
@@ -202,7 +202,7 @@ This script will write 1 byte to the file1_scriptfs 50 times. Give it some time,
 
 **2** For ramfs, do the following:
 
-	   python3 ~/TypeOS/playground/run_many_times.py 50  "/root/TypeOS/playground/make_script.py -t 0 -s "noop" -c "poem"  1b /mnt/scriptfs/file1_ramfs  seq wr_throug"
+	   python3 ~/playground/run_many_times.py 50  "/root/scriptfs/playground/make_script.py -t 0 -s "noop" -c "poem"  1b /mnt/scriptfs/file1_ramfs  seq wr_throug"
 
 **NOTE:** MAKE Sure that you are passing the "noop" argument and NOT "mount". "noop" tells the kermel that that userspace is using ramfs and NOT scriptfs.
 
@@ -214,21 +214,21 @@ This should output something like this:
 
 To get the average time it takes to write for other types of contexts in **scriptfs**, replace the "poem" argument in 
 
-		python3 ~/TypeOS/playground/run_many_times.py 50  "/root//TypeOS/playground/make_script.py -t 0 -s "mount" -c "poem"  1b /mnt/scriptfs/file1_scriptfs  seq wr_through"
+		python3 ~/scriptfs/playground/run_many_times.py 50  "/root/scriptfs/playground/make_script.py -t 0 -s "mount" -c "poem"  1b /mnt/scriptfs/file1_scriptfs  seq wr_through"
 		
 with "short_novel", "small_novel", "medium_novel", "large_novel" or "super_novel".
 
-**Be sure to also replace the file name argument with something of your liking. This MUST be a full path when running the  " ~/TypeOS/playground/run_many_times.py" script.**
+**Be sure to also replace the file name argument with something of your liking. This MUST be a full path when running the  " ~/scriptfs/playground/run_many_times.py" script.**
 
 
 
 To get the average time it takes to write for other types of contexts in **ramfs**, replace the "poem" argument in 
 
-		python3 ~/TypeOS/playground/run_may_times.py 50  "/root//TypeOS/playground/make_script.py -t 0 -s "noop" -c "poem"  1b /mnt/scriptfs/file1_scriptfs  seq wr_through"
+		python3 ~/scriptfs/playground/run_may_times.py 50  "/root/scriptfs/playground/make_script.py -t 0 -s "noop" -c "poem"  1b /mnt/scriptfs/file1_scriptfs  seq wr_through"
 		
 with "short_novel", "small_novel", "medium_novel", "large_novel" or "super_novel".
 
-**Be sure to also replace the file name argument with something of your liking. This MUST be a full path when running the  "~/TypeOS/playground/run_many_times.py" script. Please NOTE the "noop" argument. This tells the kernel that this process from userspace wants to use ramfs, and NOT scriptfs**
+**Be sure to also replace the file name argument with something of your liking. This MUST be a full path when running the  "~/scriptfs/playground/run_many_times.py" script. Please NOTE the "noop" argument. This tells the kernel that this process from userspace wants to use ramfs, and NOT scriptfs**
 
 	
 
